@@ -1,1 +1,1 @@
-// 
+export { default as toDataView } from './toDataView'
