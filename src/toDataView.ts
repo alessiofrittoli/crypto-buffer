@@ -17,7 +17,7 @@ export type ToDataViewInput = (
  * @param data The data to convert to `DataView`.
  * @returns The `DataView` of the given data. Throws a new Exception on failure.
  */
-const toDataView = ( data: ToDataViewInput ) => {
+const toDataView = ( data: ToDataViewInput ): DataView => {
 
 	if ( Array.isArray( data ) ) {
 		return toDataView( new Uint8Array( data ).buffer )
