@@ -26,6 +26,17 @@
 	"files": [
 		"dist"
 	],
+	"exports": {
+		".": {
+			"import": "./dist/index.mjs",
+			"require": "./dist/index.js"
+		},
+		"./toDataView": {
+			"types": "./dist/toDataView.d.ts",
+			"import": "./dist/toDataView.mjs",
+			"require": "./dist/toDataView.js"
+		}
+	},
 	"sideEffects": false,
 	"scripts": {
 		"build": "eslint && jest --ci --verbose && tsup",
