@@ -1,5 +1,9 @@
+import { stringToBytes } from './conversion'
+
 export type ToDataViewInput = (
+	| string
 	| number[]
+	| Buffer
 	| ArrayBuffer
 	| Int8Array
 	| Int16Array
@@ -18,6 +22,10 @@ export type ToDataViewInput = (
  * @returns The `DataView` of the given data. Throws a new Exception on failure.
  */
 const toDataView = ( data: ToDataViewInput ): DataView => {
+
+	if ( typeof data === 'string' ) {
+		return toDataView( stringToBytes( data ) )
+	}
 
 	if ( Array.isArray( data ) ) {
 		return toDataView( new Uint8Array( data ).buffer )

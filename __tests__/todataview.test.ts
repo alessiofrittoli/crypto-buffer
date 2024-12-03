@@ -1,13 +1,19 @@
 import toDataView from '@/toDataView'
+import { stringToBytes } from '@/conversion'
 
 describe( 'toDataView' , () => {
 
 	const rawValue	= 'some value here!'
-	const bytes		= (
-		typeof window !== 'undefined'
-		? [ ...new TextEncoder().encode( rawValue ) ]
-		: [ ...Buffer.from( rawValue ) ]
-	)
+	const bytes		= stringToBytes( rawValue )
+
+	it( 'supports String input', () => {
+		const dataView = toDataView( rawValue )
+		
+		expect( dataView ).toBeInstanceOf( DataView )
+		expect( dataView.byteLength ).toBe( bytes.length )
+		expect( Buffer.from( dataView.buffer ).toString() ).toBe( rawValue )		
+	} )
+
 
 	it( 'supports Array of bytes', () => {
 		const dataView = toDataView( bytes )
@@ -26,9 +32,9 @@ describe( 'toDataView' , () => {
 	} )
 
 
-	it( 'supports Uint8Array', () => {
-		const uint8Array	= new Uint8Array( bytes )
-		const dataView		= toDataView( uint8Array )
+	it( 'supports Int8Array', () => {
+		const int8Array	= new Int8Array( bytes )
+		const dataView	= toDataView( int8Array )
 
 		expect( dataView ).toBeInstanceOf( DataView )
 		expect( dataView.byteLength ).toBe( bytes.length )
@@ -95,7 +101,7 @@ describe( 'toDataView' , () => {
 
 		try {
 			// @ts-expect-error negative testing
-			toDataView( bytes.join( ',' ) )
+			toDataView( bytes.at( 0 ) )
 			// eslint-disable-next-line @typescript-eslint/no-unused-vars
 		} catch ( error ) {
 			pass = true
