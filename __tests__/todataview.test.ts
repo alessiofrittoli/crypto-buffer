@@ -1,5 +1,5 @@
 import toDataView from '@/toDataView'
-import { stringToBytes } from '@/conversion'
+import { stringToBuffer, stringToBytes } from '@/conversion'
 
 describe( 'toDataView' , () => {
 
@@ -18,6 +18,14 @@ describe( 'toDataView' , () => {
 	it( 'supports Array of bytes', () => {
 		const dataView = toDataView( bytes )
 		
+		expect( dataView ).toBeInstanceOf( DataView )
+		expect( dataView.byteLength ).toBe( bytes.length )
+	} )
+
+
+	it( 'supports Buffer', () => {
+		const dataView = toDataView( stringToBuffer( rawValue ) )
+
 		expect( dataView ).toBeInstanceOf( DataView )
 		expect( dataView.byteLength ).toBe( bytes.length )
 	} )
