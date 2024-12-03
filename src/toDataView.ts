@@ -4,6 +4,7 @@ export type ToDataViewInput = (
 	| string
 	| number[]
 	| Buffer
+	| ArrayLike<number>
 	| ArrayBuffer
 	| Int8Array
 	| Int16Array
@@ -42,7 +43,8 @@ const toDataView = ( data: ToDataViewInput ): DataView => {
 		data instanceof Uint8Array ||
 		data instanceof Uint16Array ||
 		data instanceof Uint32Array ||
-		data instanceof Uint8ClampedArray
+		data instanceof Uint8ClampedArray ||
+		( typeof Buffer !== 'undefined' && data instanceof Buffer )
 	) {
 		return new DataView( data.buffer, data.byteOffset, data.byteLength )
 	}
