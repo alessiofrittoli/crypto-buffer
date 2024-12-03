@@ -1,6 +1,6 @@
 {
 	"name": "@alessiofrittoli/crypto-buffer",
-	"version": "0.1.0-alpha.2",
+	"version": "0.1.0-alpha.3",
 	"description": "Lightweight TypeScript Node.js Buffers utility library",
 	"author": {
 		"name": "Alessio Frittoli",
@@ -36,6 +36,11 @@
 			"types": "./dist/toDataView.d.ts",
 			"import": "./dist/toDataView.mjs",
 			"require": "./dist/toDataView.js"
+		},
+		"./conversion": {
+			"types": "./dist/conversion.d.ts",
+			"import": "./dist/conversion.mjs",
+			"require": "./dist/conversion.js"
 		}
 	},
 	"sideEffects": false,
