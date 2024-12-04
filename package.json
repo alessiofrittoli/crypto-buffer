@@ -50,6 +50,8 @@
 		"test": "jest --watchAll --verbose",
 		"test:ci": "jest --ci --verbose",
 		"test:jest": "pnpm test jest.test.ts",
+		"test:conversion": "pnpm test conversion.test.ts",
+		"test:conversion:jsdom": "JSDOM=true pnpm test:conversion",
 		"test:todataview": "pnpm test todataview.test.ts",
 		"test:todataview:jsdom": "JSDOM=true pnpm test:todataview"
 	},
