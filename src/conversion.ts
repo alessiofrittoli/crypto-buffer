@@ -20,3 +20,33 @@ export const stringToBuffer = ( input: string ): Uint8Array | Buffer => (
 export const stringToBytes = ( input: string ): number[] => (
 	[ ...stringToBuffer( input ) ]
 )
+
+
+export type BinaryToStringInput = (
+	| Array<number>
+	| Buffer
+	| ArrayBuffer
+	| Int8Array
+	| Int16Array
+	| Int32Array
+	| Uint8Array
+	| Uint16Array
+	| Uint32Array
+	| Uint8ClampedArray
+)
+
+
+/**
+ * Return the string representation of the given input.
+ * 
+ * @param input The input data to convert.
+ * @returns The string representation of the given input.
+ */
+export const binaryToString = ( input: BinaryToStringInput ) => (
+	typeof Buffer !== 'undefined' && input instanceof Buffer
+		? input.toString()
+		: (
+			new TextDecoder()
+				.decode( new Uint8Array( input ) )
+		)
+)
