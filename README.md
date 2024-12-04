@@ -12,6 +12,7 @@ Version 1.0.0
 	- [Conversion utilities](#conversion-utilities)
 		- [stringToBuffer](#stringtobuffer)
 		- [stringToBytes](#stringtobytes)
+		- [binaryToString](#binaryToString)
 - [Security](#security)
 - [Credits](#made-with-)
 
@@ -251,6 +252,72 @@ const bytes = stringToBytes( data )
 
 console.log( bytes ) // [ 72, 101, 108, 108, 111 ] (ASCII values of 'Hello')
 
+```
+
+</details>
+
+---
+
+##### `binaryToString`
+
+The `binaryToString` function converts various binary data types into their string representations.\
+It is designed to be cross-platform, working in both Node.js and browser environments.
+
+<details>
+
+<summary>Parameters</summary>
+
+| Parameter | Type                  | Description                                       |
+|-----------|-----------------------|---------------------------------------------------|
+| `input`   | `BinaryToStringInput` | The binary data to be converted to a string.      |
+|           |                       | - `Array<number>` - A simple array of bytes.      |
+|           |                       | - `Buffer` - Node.js buffer instance.             |
+|           |                       | - `ArrayBuffer` - Generic buffer for binary data. |
+|           |                       | - `Int8Array`                                     |
+|           |                       | - `Int16Array`                                    |
+|           |                       | - `Int32Array`                                    |
+|           |                       | - `Uint8Array`                                    |
+|           |                       | - `Uint16Array`                                   |
+|           |                       | - `Uint32Array`                                   |
+|           |                       | - `Uint8ClampedArray`                             |
+
+</details>
+
+<details>
+
+<summary>Returns</summary>
+
+Type `string`
+
+A string representation of the given input.
+
+</details>
+
+<details>
+
+<summary>Example usage</summary>
+
+###### Node.js
+
+```ts
+import { binaryToString } from '@alessiofrittoli/crypto-buffer'
+// or
+import { binaryToString } from '@alessiofrittoli/crypto-buffer/conversion'
+
+console.log( binaryToString( Buffer.from( 'Hello, World!' ) ) )
+// Outputs: 'Hello, World!'
+```
+
+###### Browser
+
+```ts
+import { binaryToString, stringToBytes } from '@alessiofrittoli/crypto-buffer'
+// or
+import { binaryToString, stringToBytes } from '@alessiofrittoli/crypto-buffer/conversion'
+
+const uint8Array = new Uint8Array( stringToBytes( 'Hello!' ) )
+console.log( binaryToString( uint8Array ) )
+// Outputs: 'Hello!'
 ```
 
 </details>
