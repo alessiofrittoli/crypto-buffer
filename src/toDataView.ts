@@ -2,9 +2,9 @@ import { stringToBytes } from './conversion'
 
 export type ToDataViewInput = (
 	| string
-	| number[]
-	| Buffer
+	| Array<number>
 	| ArrayLike<number>
+	| Buffer
 	| ArrayBuffer
 	| Int8Array
 	| Int16Array
@@ -19,37 +19,37 @@ export type ToDataViewInput = (
 /**
  * Convert data to {@link DataView}.
  *
- * @param data The data to convert to `DataView`.
+ * @param input The data to convert to `DataView`.
  * @returns The `DataView` of the given data. Throws a new Exception on failure.
  */
-const toDataView = ( data: ToDataViewInput ): DataView => {
+const toDataView = ( input: ToDataViewInput ): DataView => {
 
-	if ( typeof data === 'string' ) {
-		return toDataView( stringToBytes( data ) )
+	if ( typeof input === 'string' ) {
+		return toDataView( stringToBytes( input ) )
 	}
 
-	if ( Array.isArray( data ) ) {
-		return toDataView( new Uint8Array( data ).buffer )
+	if ( Array.isArray( input ) ) {
+		return toDataView( new Uint8Array( input ).buffer )
 	}
 
-	if ( data instanceof ArrayBuffer ) {
-		return new DataView( data )
+	if ( input instanceof ArrayBuffer ) {
+		return new DataView( input )
 	}
 
 	if (
-		data instanceof Int8Array ||
-		data instanceof Int16Array ||
-		data instanceof Int32Array ||
-		data instanceof Uint8Array ||
-		data instanceof Uint16Array ||
-		data instanceof Uint32Array ||
-		data instanceof Uint8ClampedArray ||
-		( typeof Buffer !== 'undefined' && data instanceof Buffer )
+		input instanceof Int8Array ||
+		input instanceof Int16Array ||
+		input instanceof Int32Array ||
+		input instanceof Uint8Array ||
+		input instanceof Uint16Array ||
+		input instanceof Uint32Array ||
+		input instanceof Uint8ClampedArray ||
+		( typeof Buffer !== 'undefined' && input instanceof Buffer )
 	) {
-		return new DataView( data.buffer, data.byteOffset, data.byteLength )
+		return new DataView( input.buffer, input.byteOffset, input.byteLength )
 	}
 
-	throw new TypeError( 'Expected `data` to be an ArrayBuffer, Buffer, Int8Array, Int16Array, Int32Array, Uint8Array, Uint16Array, Uint32Array or Uint8ClampedArray' )
+	throw new TypeError( 'Expected `input` to be a string, Array<number>, ArrayLike<number>, Buffer, ArrayBuffer, Int8Array, Int16Array, Int32Array, Uint8Array, Uint16Array, Uint32Array or Uint8ClampedArray' )
 
 }
 

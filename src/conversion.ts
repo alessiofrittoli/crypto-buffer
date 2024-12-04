@@ -1,22 +1,22 @@
 /**
- * Convert a String into an Array of bytes.
+ * Convert a String into a Uint8Array or Node.js Buffer.
  * 
- * @param string The string to convert.
- * @returns An Array of bytes.
+ * @param input The string to convert.
+ * @returns A Uint8Array or Node.js Buffer.
  */
-export const stringToBytes = ( string: string ): number[] => (
-	[ ...stringToBuffer( string ) ]
+export const stringToBuffer = ( input: string ): Uint8Array | Buffer => (
+	typeof window !== 'undefined'
+		? new Uint8Array( new TextEncoder().encode( input ) )
+		: Buffer.from( input )
 )
 
 
 /**
- * Convert a String into a Uint8Array or Node.js Buffer.
+ * Convert a String into an Array of bytes.
  * 
- * @param string The string to convert.
- * @returns A Uint8Array or Node.js Buffer.
+ * @param input The string to convert.
+ * @returns An Array of bytes.
  */
-export const stringToBuffer = ( string: string ): Uint8Array | Buffer => (
-	typeof Buffer !== 'undefined'
-		? Buffer.from( string )
-		: new Uint8Array( new TextEncoder().encode( string ) )
+export const stringToBytes = ( input: string ): number[] => (
+	[ ...stringToBuffer( input ) ]
 )
