@@ -45,10 +45,12 @@
 	},
 	"sideEffects": false,
 	"scripts": {
-		"build": "eslint && jest --ci --verbose && tsup",
+		"build": "eslint && pnpm test:ci && pnpm test:ci:jsdom && tsup",
 		"lint": "eslint",
 		"test": "jest --watchAll --verbose",
+		"test:jsdom": "JSDOM=true pnpm test",
 		"test:ci": "jest --ci --verbose",
+		"test:ci:jsdom": "JSDOM=true pnpm test:ci",
 		"test:jest": "pnpm test jest.test.ts",
 		"test:conversion": "pnpm test conversion.test.ts",
 		"test:conversion:jsdom": "JSDOM=true pnpm test:conversion",
