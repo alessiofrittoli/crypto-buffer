@@ -1,12 +1,16 @@
 import toDataView from '@/toDataView'
 import { stringToBuffer, stringToBytes } from '@/conversion'
 
+const isClient		= typeof window !== 'undefined'
+const clientSuffix	= isClient ? ' in the client' : ''
+
+
 describe( 'toDataView' , () => {
 
 	const rawValue	= 'some value here!'
 	const bytes		= stringToBytes( rawValue )
 
-	it( 'supports String input', () => {
+	it( 'supports String input' + clientSuffix, () => {
 		const dataView = toDataView( rawValue )
 		
 		expect( dataView ).toBeInstanceOf( DataView )
@@ -15,7 +19,7 @@ describe( 'toDataView' , () => {
 	} )
 
 
-	it( 'supports Array of bytes', () => {
+	it( 'supports Array of bytes' + clientSuffix, () => {
 		const dataView = toDataView( bytes )
 		
 		expect( dataView ).toBeInstanceOf( DataView )
@@ -23,7 +27,7 @@ describe( 'toDataView' , () => {
 	} )
 
 
-	it( 'supports Buffer', () => {
+	it( 'supports Buffer' + clientSuffix, () => {
 		const dataView = toDataView( stringToBuffer( rawValue ) )
 
 		expect( dataView ).toBeInstanceOf( DataView )
@@ -31,7 +35,7 @@ describe( 'toDataView' , () => {
 	} )
 
 
-	it( 'supports ArrayBuffer', () => {
+	it( 'supports ArrayBuffer' + clientSuffix, () => {
 		const arrayBuffer	= new Uint8Array( bytes ).buffer
 		const dataView		= toDataView( arrayBuffer )
 
@@ -40,7 +44,7 @@ describe( 'toDataView' , () => {
 	} )
 
 
-	it( 'supports Int8Array', () => {
+	it( 'supports Int8Array' + clientSuffix, () => {
 		const int8Array	= new Int8Array( bytes )
 		const dataView	= toDataView( int8Array )
 
@@ -49,7 +53,7 @@ describe( 'toDataView' , () => {
 	} )
 
 	
-	it( 'supports Int16Array', () => {
+	it( 'supports Int16Array' + clientSuffix, () => {
 		const int16Array	= new Int16Array( bytes )
 		const dataView		= toDataView( int16Array )
 
@@ -58,7 +62,7 @@ describe( 'toDataView' , () => {
 	} )
 
 
-	it( 'supports Int32Array', () => {
+	it( 'supports Int32Array' + clientSuffix, () => {
 		const int32Array	= new Int32Array( bytes )
 		const dataView		= toDataView( int32Array )
 
@@ -67,7 +71,7 @@ describe( 'toDataView' , () => {
 	} )
 
 
-	it( 'supports Uint8Array', () => {
+	it( 'supports Uint8Array' + clientSuffix, () => {
 		const uint8Array	= new Uint8Array( bytes )
 		const dataView		= toDataView( uint8Array )
 
@@ -76,7 +80,7 @@ describe( 'toDataView' , () => {
 	} )
 
 
-	it( 'supports Uint16Array', () => {
+	it( 'supports Uint16Array' + clientSuffix, () => {
 		const uint16Array	= new Uint16Array( bytes )
 		const dataView		= toDataView( uint16Array )
 
@@ -85,7 +89,7 @@ describe( 'toDataView' , () => {
 	} )
 
 
-	it( 'supports Uint32Array', () => {
+	it( 'supports Uint32Array' + clientSuffix, () => {
 		const uint32Array	= new Uint32Array( bytes )
 		const dataView		= toDataView( uint32Array )
 
@@ -94,7 +98,7 @@ describe( 'toDataView' , () => {
 	} )
 
 
-	it( 'supports Uint8ClampedArray', () => {
+	it( 'supports Uint8ClampedArray' + clientSuffix, () => {
 		const clampedArray	= new Uint8ClampedArray( bytes )
 		const dataView		= toDataView( clampedArray )
 
@@ -103,7 +107,7 @@ describe( 'toDataView' , () => {
 	} )
 
 
-	it( 'throws a new Exception on unsupported input type', () => {
+	it( 'throws a new Exception on unsupported input type' + clientSuffix, () => {
 
 		let pass = false
 
