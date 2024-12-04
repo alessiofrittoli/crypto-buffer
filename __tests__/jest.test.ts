@@ -11,4 +11,15 @@ describe( 'Jest', () => {
 		expect( isLoaded ).toBe( true )
 	} )
 
+
+	if ( process.env.JSDOM === 'true' ) {
+
+		it( 'runs with jest-environment-jsdom', () => {
+
+			expect( window ).not.toBeUndefined()
+
+		} )
+
+	}
+	
 } )
