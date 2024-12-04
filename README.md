@@ -1,6 +1,6 @@
 # Crypto Buffer 🚌
 
-Version 0.1.0-alpha.3
+Version 1.0.0
 
 ## Lightweight TypeScript Node.js Buffers utility library
 
