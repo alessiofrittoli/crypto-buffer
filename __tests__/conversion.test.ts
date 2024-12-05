@@ -1,15 +1,15 @@
-import { binaryToString, stringToBuffer, stringToBytes } from '@/conversion'
+import { binaryToString, stringToBinary, stringToBytes } from '@/conversion'
 
 const isClient		= typeof window !== 'undefined'
 const clientSuffix	= isClient ? ' in the client' : ''
 
 
-describe( 'stringToBuffer', () => {
+describe( 'stringToBinary', () => {
 
 	it( 'converts a String to Buffer' + clientSuffix, () => {
 
-		expect( stringToBuffer( 'Hello world!' ) )
-			.toBeInstanceOf( ! isClient ? Buffer : Uint8Array )
+		expect( stringToBinary( 'Hello world!' ) )
+			.toBeInstanceOf( Uint8Array )
 
 	} )
 
@@ -41,7 +41,7 @@ describe( 'binaryToString', () => {
 
 
 	it( 'supports Buffer' + clientSuffix, () => {
-		expect( binaryToString( stringToBuffer( rawData ) ) )
+		expect( binaryToString( stringToBinary( rawData ) ) )
 			.toBe( rawData )
 	} )
 

@@ -1,13 +1,14 @@
+import { coerceToUint8Array, CoerceToUint8ArrayInput } from './coercion'
+
+
 /**
- * Convert a String into a Uint8Array or Node.js Buffer.
+ * Convert a String into a Uint8Array.
  * 
  * @param input The string to convert.
- * @returns A Uint8Array or Node.js Buffer.
+ * @returns A new Uint8Array instance.
  */
-export const stringToBuffer = ( input: string ): Uint8Array | Buffer => (
-	typeof window !== 'undefined'
-		? new Uint8Array( new TextEncoder().encode( input ) )
-		: Buffer.from( input )
+export const stringToBinary = ( input: string ): Uint8Array | Buffer => (
+	new Uint8Array( new TextEncoder().encode( input ) )
 )
 
 
@@ -18,21 +19,7 @@ export const stringToBuffer = ( input: string ): Uint8Array | Buffer => (
  * @returns An Array of bytes.
  */
 export const stringToBytes = ( input: string ): number[] => (
-	[ ...stringToBuffer( input ) ]
-)
-
-
-export type BinaryToStringInput = (
-	| Array<number>
-	| Buffer
-	| ArrayBuffer
-	| Int8Array
-	| Int16Array
-	| Int32Array
-	| Uint8Array
-	| Uint16Array
-	| Uint32Array
-	| Uint8ClampedArray
+	[ ...stringToBinary( input ) ]
 )
 
 
@@ -42,11 +29,7 @@ export type BinaryToStringInput = (
  * @param input The input data to convert.
  * @returns The string representation of the given input.
  */
-export const binaryToString = ( input: BinaryToStringInput ) => (
-	typeof Buffer !== 'undefined' && input instanceof Buffer
-		? input.toString()
-		: (
-			new TextDecoder()
-				.decode( new Uint8Array( input ) )
-		)
+export const binaryToString = ( input: CoerceToUint8ArrayInput ) => (
+	new TextDecoder()
+		.decode( coerceToUint8Array( input ) )
 )

@@ -1,9 +1,9 @@
 import toDataView from '@/toDataView'
-import { stringToBuffer, stringToBytes } from '@/conversion'
+import { stringToBinary, stringToBytes } from '@/conversion'
+import { coerceToBigInt64Array, coerceToBigUint64Array, coerceToFloat32Array, coerceToFloat64Array } from '@/coercion'
 
 const isClient		= typeof window !== 'undefined'
 const clientSuffix	= isClient ? ' in the client' : ''
-
 
 describe( 'toDataView' , () => {
 
@@ -28,7 +28,7 @@ describe( 'toDataView' , () => {
 
 
 	it( 'supports Buffer' + clientSuffix, () => {
-		const dataView = toDataView( stringToBuffer( rawValue ) )
+		const dataView = toDataView( stringToBinary( rawValue ) )
 
 		expect( dataView ).toBeInstanceOf( DataView )
 		expect( dataView.byteLength ).toBe( bytes.length )
@@ -95,6 +95,43 @@ describe( 'toDataView' , () => {
 
 		expect( dataView ).toBeInstanceOf( DataView )
 		expect( dataView.byteLength ).toBe( bytes.length * 4 )
+	} )
+
+	
+	it( 'supports BigInt64Array' + clientSuffix, () => {
+		const bigInt64Array	= coerceToBigInt64Array( rawValue )
+		const dataView		= toDataView( bigInt64Array )
+
+		expect( dataView ).toBeInstanceOf( DataView )
+		expect( dataView.byteLength ).toBe( bytes.length )
+	} )
+
+
+	it( 'supports BigUint64Array' + clientSuffix, () => {
+		const bigUint64Array= coerceToBigUint64Array( rawValue )
+		const dataView		= toDataView( bigUint64Array )
+
+		expect( dataView ).toBeInstanceOf( DataView )
+		expect( dataView.byteLength ).toBe( bytes.length )
+	} )
+
+
+	it( 'supports Float32Array' + clientSuffix, () => {
+		const float32Array	= coerceToFloat32Array( rawValue )
+		const dataView		= toDataView( float32Array )
+
+		expect( dataView ).toBeInstanceOf( DataView )
+		expect( dataView.byteLength ).toBe( bytes.length )
+	} )
+
+
+	it( 'supports Float64Array' + clientSuffix, () => {
+		const float64Array	= coerceToFloat64Array( rawValue )
+		const dataView		= toDataView( float64Array )
+
+		expect( dataView ).toBeInstanceOf( DataView )
+		expect( dataView.byteLength ).toBe( bytes.length )
+
 	} )
 
 
