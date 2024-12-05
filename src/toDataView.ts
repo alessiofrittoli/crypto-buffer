@@ -3,17 +3,9 @@ import { stringToBytes } from './conversion'
 export type ToDataViewInput = (
 	| string
 	| Array<number>
-	| ArrayLike<number>
 	| Buffer
 	| ArrayBuffer
-	| ArrayBufferLike
-	| Int8Array
-	| Int16Array
-	| Int32Array
-	| Uint8Array
-	| Uint16Array
-	| Uint32Array
-	| Uint8ClampedArray
+	| NodeJS.TypedArray
 )
 
 
@@ -30,7 +22,8 @@ const toDataView = ( input: ToDataViewInput ): DataView => {
 	}
 
 	if ( Array.isArray( input ) ) {
-		return toDataView( new Uint8Array( input ).buffer )
+		// return toDataView( new Uint8Array( input ).buffer )
+		return toDataView( new Uint8Array( input ) )
 	}
 
 	if ( input instanceof ArrayBuffer ) {
@@ -45,12 +38,27 @@ const toDataView = ( input: ToDataViewInput ): DataView => {
 		input instanceof Uint16Array ||
 		input instanceof Uint32Array ||
 		input instanceof Uint8ClampedArray ||
-		( typeof Buffer !== 'undefined' && input instanceof Buffer )
+		input instanceof BigInt64Array ||
+		input instanceof BigUint64Array ||
+		input instanceof Float32Array ||
+		input instanceof Float64Array ||
+		( typeof Buffer !== 'undefined' && ( input as Buffer ) instanceof Buffer )
 	) {
 		return new DataView( input.buffer, input.byteOffset, input.byteLength )
 	}
 
-	throw new TypeError( 'Expected `input` to be a string, Array<number>, ArrayLike<number>, Buffer, ArrayBuffer, Int8Array, Int16Array, Int32Array, Uint8Array, Uint16Array, Uint32Array or Uint8ClampedArray' )
+	const expectedInputs = [
+		'string', 'Array<number>', 'Buffer', 'ArrayBuffer',
+		'Int8Array', 'Int16Array', 'Int32Array',
+		'Uint8Array', 'Uint16Array', 'Uint32Array',
+		'Uint8ClampedArray', 'BigInt64Array', 'BigUint64Array',
+		'Float32Array', 'Float64Array'
+	]
+
+	throw new TypeError(
+		'Expected `input` to be one of the following supported type.',
+		{ cause: expectedInputs }
+	)
 
 }
 

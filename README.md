@@ -12,7 +12,7 @@ Version 1.2.0
 	- [Common Utilities](#common-utilities)
 		- [bufferEquals](#bufferequals)
 	- [Conversion Utilities](#conversion-utilities)
-		- [stringToBuffer](#stringtobuffer)
+		- [stringToBinary](#stringToBinary)
 		- [stringToBytes](#stringtobytes)
 		- [binaryToString](#binaryToString)
 - [Security](#security)
@@ -206,10 +206,9 @@ console.log( bufferEquals( buffer1, buffer3 ) ) // false
 
 #### `Conversion Utilities`
 
-##### `stringToBuffer`
+##### `stringToBinary`
 
-The `stringToBuffer` function is a utility for converting a string into a `Uint8Array` or a Node.js `Buffer`, depending on the runtime environment.\
-This function ensures compatibility across browser and Node.js environments by dynamically selecting the appropriate implementation.
+The `stringToBinary` function is a utility for converting a string into a `Uint8Array`\
 
 <details>
 
@@ -225,12 +224,9 @@ This function ensures compatibility across browser and Node.js environments by d
 
 <summary>Returns</summary>
 
-Type: `Uint8Array | Buffer`
+Type: `Uint8Array`
 
-The function returns:
-
-- A Node.js `Buffer` if the `Buffer` object is available (Node.js environment).
-- A `Uint8Array` if running in a browser or other environment where `Buffer` is not defined.
+The function returns a new `Uint8Array` instance.
 
 </details>
 
@@ -238,30 +234,18 @@ The function returns:
 
 <summary>Usage</summary>
 
-###### Convert a String in a Node.js Environment
+###### Convert a String to binary data
 
 ```ts
-import { stringToBuffer } from '@alessiofrittoli/crypto-buffer'
+import { stringToBinary } from '@alessiofrittoli/crypto-buffer'
 // or
-import { stringToBuffer } from '@alessiofrittoli/crypto-buffer/conversion'
+import { stringToBinary } from '@alessiofrittoli/crypto-buffer/conversion'
 
 const data = 'Hello, World!'
-const buffer = stringToBuffer( data )
+const binary = stringToBinary( data )
 
-console.log( buffer instanceof Buffer ) // true (in Node.js)
-```
-
-###### Convert a String in a Browser Environment
-
-```ts
-import { stringToBuffer } from '@alessiofrittoli/crypto-buffer'
-// or
-import { stringToBuffer } from '@alessiofrittoli/crypto-buffer/conversion'
-
-const data = 'Hello, Browser!'
-const buffer = stringToBuffer( data )
-
-console.log( buffer instanceof Uint8Array ) // true (in a browser)
+console.log( new TextDecoder().decode( binary ) )
+// Outputs: 'Hello, World!'
 ```
 
 </details>
@@ -270,7 +254,7 @@ console.log( buffer instanceof Uint8Array ) // true (in a browser)
 
 ##### `stringToBytes`
 
-The `stringToBytes` function converts a string into an Array of bytes (`number[]`). It leverages the [stringToBuffer](#stringtobuffer) utility to handle string-to-binary conversion, ensuring compatibility with both browser and Node.js environments. The resulting array represents the byte values of the input string.
+The `stringToBytes` function converts a string into an Array of bytes (`number[]`). It leverages the [stringToBinary](#stringToBinary) utility to handle string-to-binary conversion, ensuring compatibility with both browser and Node.js environments. The resulting array represents the byte values of the input string.
 
 <details>
 
