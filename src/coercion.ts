@@ -19,7 +19,7 @@ export type CoerceToUint8ArrayInput = (
  * @param	input The input data to convert.
  * @returns	A new instance of Uint8Array.
  */
-export const coerceToUint8Array = ( input: CoerceToUint8ArrayInput ) => {
+export const coerceToUint8Array = ( input: CoerceToUint8ArrayInput ): Uint8Array => {
 
 	if ( typeof input === 'string' ) {
 		input = stringToBytes( input )
@@ -107,7 +107,7 @@ export const coerceToFloatArray = <T extends FloatArraySupportedBits>(
  * @param	input The input data to convert.
  * @returns	A new instance of Float32Array.
  */
-export const coerceToFloat32Array = ( input: CoerceToUint8ArrayInput ) => (
+export const coerceToFloat32Array = ( input: CoerceToUint8ArrayInput ): Float32Array => (
 	coerceToFloatArray( input, 32 )
 )
 
@@ -118,7 +118,7 @@ export const coerceToFloat32Array = ( input: CoerceToUint8ArrayInput ) => (
  * @param	input The input data to convert.
  * @returns	A new instance of Float64Array.
  */
-export const coerceToFloat64Array = ( input: CoerceToUint8ArrayInput ) => (
+export const coerceToFloat64Array = ( input: CoerceToUint8ArrayInput ): Float64Array => (
 	coerceToFloatArray( input, 64 )
 )
 
@@ -179,7 +179,7 @@ export const coerceToBigArray = <T extends boolean>(
  * @param	input The input data to convert.
  * @returns	A new instance of BigInt64Array.
  */
-export const coerceToBigInt64Array = ( input: CoerceToUint8ArrayInput ) => (
+export const coerceToBigInt64Array = ( input: CoerceToUint8ArrayInput ): BigInt64Array => (
 	coerceToBigArray( input, false )
 )
 
@@ -190,6 +190,6 @@ export const coerceToBigInt64Array = ( input: CoerceToUint8ArrayInput ) => (
  * @param	input The input data to convert.
  * @returns	A new instance of BigUint64Array.
  */
-export const coerceToBigUint64Array = (input: CoerceToUint8ArrayInput) => (
+export const coerceToBigUint64Array = ( input: CoerceToUint8ArrayInput ): BigUint64Array => (
 	coerceToBigArray( input, true )
 )

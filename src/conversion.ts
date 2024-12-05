@@ -7,7 +7,7 @@ import { coerceToUint8Array, CoerceToUint8ArrayInput } from './coercion'
  * @param input The string to convert.
  * @returns A new Uint8Array instance.
  */
-export const stringToBinary = ( input: string ): Uint8Array | Buffer => (
+export const stringToBinary = ( input: string ): Uint8Array => (
 	new Uint8Array( new TextEncoder().encode( input ) )
 )
 
