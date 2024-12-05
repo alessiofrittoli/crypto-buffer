@@ -6,6 +6,7 @@ export type ToDataViewInput = (
 	| ArrayLike<number>
 	| Buffer
 	| ArrayBuffer
+	| ArrayBufferLike
 	| Int8Array
 	| Int16Array
 	| Int32Array
