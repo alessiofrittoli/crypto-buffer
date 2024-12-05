@@ -58,6 +58,8 @@
 		"test:ci:jsdom": "JSDOM=true pnpm test:ci",
 		"test:jest": "pnpm test jest.test.ts",
 		"test:jest:jsdom": "JSDOM=true pnpm test:jest",
+		"test:coercion": "pnpm test coercion.test.ts",
+		"test:coercion:jsdom": "JSDOM=true pnpm test:coercion",
 		"test:common": "pnpm test common.test.ts",
 		"test:common:jsdom": "JSDOM=true pnpm test:common",
 		"test:conversion": "pnpm test conversion.test.ts",
