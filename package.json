@@ -37,6 +37,11 @@
 			"import": "./dist/toDataView.mjs",
 			"require": "./dist/toDataView.js"
 		},
+		"./coercion": {
+			"types": "./dist/coercion.d.ts",
+			"import": "./dist/coercion.mjs",
+			"require": "./dist/coercion.js"
+		},
 		"./common": {
 			"types": "./dist/common.d.ts",
 			"import": "./dist/common.mjs",
