@@ -37,6 +37,11 @@
 			"import": "./dist/toDataView.mjs",
 			"require": "./dist/toDataView.js"
 		},
+		"./common": {
+			"types": "./dist/common.d.ts",
+			"import": "./dist/common.mjs",
+			"require": "./dist/common.js"
+		},
 		"./conversion": {
 			"types": "./dist/conversion.d.ts",
 			"import": "./dist/conversion.mjs",
@@ -53,6 +58,8 @@
 		"test:ci:jsdom": "JSDOM=true pnpm test:ci",
 		"test:jest": "pnpm test jest.test.ts",
 		"test:jest:jsdom": "JSDOM=true pnpm test:jest",
+		"test:common": "pnpm test common.test.ts",
+		"test:common:jsdom": "JSDOM=true pnpm test:common",
 		"test:conversion": "pnpm test conversion.test.ts",
 		"test:conversion:jsdom": "JSDOM=true pnpm test:conversion",
 		"test:todataview": "pnpm test todataview.test.ts",

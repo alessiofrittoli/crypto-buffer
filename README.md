@@ -9,7 +9,9 @@ Version 1.1.0
 - [Getting started](#getting-started)
 - [Utilities](#utilities)
 	- [toDataView](#todataview)
-	- [Conversion utilities](#conversion-utilities)
+	- [Common Utilities](#common-utilities)
+		- [bufferEquals](#bufferequals)
+	- [Conversion Utilities](#conversion-utilities)
 		- [stringToBuffer](#stringtobuffer)
 		- [stringToBytes](#stringtobytes)
 		- [binaryToString](#binaryToString)
@@ -49,6 +51,7 @@ type ToDataViewInput = (
 	| ArrayLike<number>
 	| Buffer
 	| ArrayBuffer
+	| ArrayBufferLike
 	| Int8Array
 	| Int16Array
 	| Int32Array
@@ -71,6 +74,7 @@ type ToDataViewInput = (
 |           |                   | - `ArrayLike<number>`                                                   |
 |           |                   | - `Buffer`                                                              |
 |           |                   | - `ArrayBuffer`                                                         |
+|           |                   | - `ArrayBufferLike`                                                     |
 |           |                   | - `Int8Array`                                                           |
 |           |                   | - `Int16Array`                                                          |
 |           |                   | - `Int32Array`                                                          |
@@ -142,6 +146,58 @@ try {
 } catch ( error ) {
 	console.error( error.message ) // Expected `input` to be a Expected `input` to be a string, Array<number>, ...
 }
+```
+
+</details>
+
+---
+
+#### `Common Utilities`
+
+##### `bufferEquals`
+
+The `bufferEquals` function leverages the [toDataView](#todataview) utility to normalize input buffers into `DataView` objects for consistent byte-level comparison.
+
+It first checks the byte lengths of the two buffers to ensure they are identical. If the lengths match, it performs a byte-by-byte comparison using the `getUint8` method of `DataView`.
+
+<details>
+
+<summary>Parameters</summary>
+
+| Parameter | Type              | Description                                  |
+|-----------|-------------------|----------------------------------------------|
+| `buffer1` | `ToDataViewInput` | The first buffer to compare.                 |
+| `buffer1` | `ToDataViewInput` | The second buffer to compare with `buffer1`. |
+
+</details>
+
+<details>
+
+<summary>Returns</summary>
+
+Type: `boolean`
+
+`true` if the buffers are equal, `false` otherwise.
+
+</details>
+
+<details>
+
+<summary>Usage</summary>
+
+###### Convert a String in a Node.js Environment
+
+```ts
+import { bufferEquals } from '@alessiofrittoli/crypto-buffer'
+// or
+import { bufferEquals } from '@alessiofrittoli/crypto-buffer/common'
+
+const buffer1 = new Uint8Array( [ 1, 2, 3 ] )
+const buffer2 = new Uint8Array( [ 1, 2, 3 ] )
+const buffer3 = new Uint8Array( [ 4, 5, 6 ] )
+
+console.log( bufferEquals( buffer1, buffer2 ) ) // true
+console.log( bufferEquals( buffer1, buffer3 ) ) // false
 ```
 
 </details>
