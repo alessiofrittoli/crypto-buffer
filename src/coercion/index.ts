@@ -1,4 +1,4 @@
-import { stringToBytes } from './conversion'
+import { stringToBytes } from '@/conversion'
 
 /**
  * Accepted input Types for Uint8Array coercion.

@@ -1,4 +1,4 @@
-import toDataView from '@/toDataView'
+import { toDataView } from '@/toDataView'
 import { stringToBinary, stringToBytes } from '@/conversion'
 import { coerceToBigInt64Array, coerceToBigUint64Array, coerceToFloat32Array, coerceToFloat64Array } from '@/coercion'
 

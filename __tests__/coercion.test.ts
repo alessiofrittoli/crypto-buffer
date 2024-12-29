@@ -140,6 +140,12 @@ describe( 'coerceToFloat32Array', () => {
 			.toBeInstanceOf( Float32Array )
 	} )
 
+
+	it( 'supports an Array of bytes' + clientSuffix, () => {
+		expect( coerceToFloat32Array( stringToBytes( rawValue ) ) )
+			.toBeInstanceOf( Float32Array )
+	} )
+
 } )
 
 
@@ -149,6 +155,12 @@ describe( 'coerceToFloat64Array', () => {
 
 	it( 'returns a new instance of Float64Array' + clientSuffix, () => {
 		expect( coerceToFloat64Array( rawValue ) )
+			.toBeInstanceOf( Float64Array )
+	} )
+
+
+	it( 'supports an Array of bytes' + clientSuffix, () => {
+		expect( coerceToFloat64Array( stringToBytes( rawValue ) ) )
 			.toBeInstanceOf( Float64Array )
 	} )
 

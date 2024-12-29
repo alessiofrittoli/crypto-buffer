@@ -15,7 +15,7 @@ export type ToDataViewInput = (
  * @param input The data to convert to `DataView`.
  * @returns The `DataView` of the given data. Throws a new Exception on failure.
  */
-const toDataView = ( input: ToDataViewInput ): DataView => {
+export const toDataView = ( input: ToDataViewInput ): DataView => {
 
 	if ( typeof input === 'string' ) {
 		return toDataView( stringToBytes( input ) )
@@ -61,5 +61,3 @@ const toDataView = ( input: ToDataViewInput ): DataView => {
 	)
 
 }
-
-export default toDataView
