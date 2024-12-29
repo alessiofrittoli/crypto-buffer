@@ -1,4 +1,4 @@
-import toDataView, { type ToDataViewInput } from './toDataView'
+import { toDataView, type ToDataViewInput } from '@/toDataView'
 
 
 /**

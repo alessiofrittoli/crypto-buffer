@@ -1,4 +1,4 @@
-import { coerceToUint8Array, CoerceToUint8ArrayInput } from './coercion'
+import { coerceToUint8Array, CoerceToUint8ArrayInput } from '@/coercion'
 
 
 /**

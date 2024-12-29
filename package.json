@@ -39,19 +39,19 @@
 			"require": "./dist/toDataView.js"
 		},
 		"./coercion": {
-			"types": "./dist/coercion.d.ts",
-			"import": "./dist/coercion.mjs",
-			"require": "./dist/coercion.js"
+			"types": "./dist/coercion/index.d.ts",
+			"import": "./dist/coercion/index.mjs",
+			"require": "./dist/coercion/index.js"
 		},
 		"./common": {
-			"types": "./dist/common.d.ts",
-			"import": "./dist/common.mjs",
-			"require": "./dist/common.js"
+			"types": "./dist/common/index.d.ts",
+			"import": "./dist/common/index.mjs",
+			"require": "./dist/common/index.js"
 		},
 		"./conversion": {
-			"types": "./dist/conversion.d.ts",
-			"import": "./dist/conversion.mjs",
-			"require": "./dist/conversion.js"
+			"types": "./dist/conversion/index.d.ts",
+			"import": "./dist/conversion/index.mjs",
+			"require": "./dist/conversion/index.js"
 		}
 	},
 	"sideEffects": false,

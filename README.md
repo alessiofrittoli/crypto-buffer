@@ -12,9 +12,9 @@ Version 2.0.1
 	- [Common Utilities](#common-utilities)
 		- [bufferEquals](#bufferequals)
 	- [Conversion Utilities](#conversion-utilities)
-		- [stringToBinary](#stringToBinary)
+		- [stringToBinary](#stringtobinary)
 		- [stringToBytes](#stringtobytes)
-		- [binaryToString](#binaryToString)
+		- [binaryToString](#binarytostring)
 - [Security](#security)
 - [Credits](#made-with-)
 
@@ -112,7 +112,7 @@ Throws a `TypeError` if the input does not match any of the supported types.
 ```ts
 import { toDataView } from '@alessiofrittoli/crypto-buffer'
 // or
-import toDataView from '@alessiofrittoli/crypto-buffer/toDataView'
+import { toDataView } from '@alessiofrittoli/crypto-buffer/toDataView'
 
 const data = 'Hello, World!'
 const view = toDataView( data )
@@ -125,7 +125,7 @@ console.log( view.byteLength ) // Logs the byte length of the string.
 ```ts
 import { toDataView } from '@alessiofrittoli/crypto-buffer'
 // or
-import toDataView from '@alessiofrittoli/crypto-buffer/toDataView'
+import { toDataView } from '@alessiofrittoli/crypto-buffer/toDataView'
 
 const data = new Uint8Array( [ 1, 2, 3, 4 ] )
 const view = toDataView( data )
@@ -138,7 +138,7 @@ console.log( view.getUint8( 0 ) ) // Logs 1
 ```ts
 import { toDataView } from '@alessiofrittoli/crypto-buffer'
 // or
-import toDataView from '@alessiofrittoli/crypto-buffer/toDataView'
+import { toDataView } from '@alessiofrittoli/crypto-buffer/toDataView'
 
 try {
 	const invalidInput = { foo: 'bar' }
