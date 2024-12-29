@@ -167,7 +167,7 @@ It first checks the byte lengths of the two buffers to ensure they are identical
 | Parameter | Type              | Description                                  |
 |-----------|-------------------|----------------------------------------------|
 | `buffer1` | `ToDataViewInput` | The first buffer to compare.                 |
-| `buffer1` | `ToDataViewInput` | The second buffer to compare with `buffer1`. |
+| `buffer2` | `ToDataViewInput` | The second buffer to compare with `buffer1`. |
 
 </details>
 
