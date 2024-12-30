@@ -1,4 +1,4 @@
-import { toDataView, type ToDataViewInput } from '@/toDataView'
+import { coerceToUint8Array, type CoerceToUint8ArrayInput } from '@/coercion'
 
 
 /**
@@ -9,17 +9,17 @@ import { toDataView, type ToDataViewInput } from '@/toDataView'
  * 
  * @returns	True if buffers are equal, false otherwise.
  */
-export const bufferEquals = ( buffer1: ToDataViewInput, buffer2: ToDataViewInput ) => {
+export const bufferEquals = ( buffer1: CoerceToUint8ArrayInput, buffer2: CoerceToUint8ArrayInput ) => {
 
-	const view1 = toDataView( buffer1 )
-	const view2 = toDataView( buffer2 )
+	const view1 = coerceToUint8Array( buffer1 )
+	const view2 = coerceToUint8Array( buffer2 )
 
 	if ( view1.byteLength !== view2.byteLength ) {
 		return false
 	}
 
 	for ( let i = 0; i < view1.byteLength; i++ ) {		
-		if ( view1.getUint8( i ) !== view2.getUint8( i ) ) return false
+		if ( view1[ i ] !== view2[ i ] ) return false
 	}
 
 	return true

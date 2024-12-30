@@ -1,5 +1,6 @@
 import { coerceToBigInt64Array, coerceToBigUint64Array, coerceToFloat32Array, coerceToFloat64Array, coerceToUint8Array } from '@/coercion'
 import { binaryToString, stringToBinary, stringToBytes } from '@/conversion'
+import { toDataView } from '@/toDataView'
 
 const isClient		= typeof window !== 'undefined'
 const clientSuffix	= isClient ? ' in the client' : ''
@@ -125,6 +126,13 @@ describe( 'coerceToUint8Array', () => {
 	it( 'supports Uint8ClampedArray' + clientSuffix, () => {
 		expect(
 			coerceToUint8Array( new Uint8ClampedArray( bytes ) ).byteLength
+		).toBe( bytes.length )
+	} )
+	
+	
+	it( 'supports DataView' + clientSuffix, () => {
+		expect(
+			coerceToUint8Array( toDataView( bytes ) ).byteLength
 		).toBe( bytes.length )
 	} )
 
