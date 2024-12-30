@@ -7,6 +7,7 @@ import { stringToBytes } from '@/conversion'
 export type CoerceToUint8ArrayInput = (
 	| string
 	| Array<number>
+	| DataView
 	| Buffer
 	| ArrayBuffer
 	| NodeJS.TypedArray
@@ -24,6 +25,14 @@ export const coerceToUint8Array = ( input: CoerceToUint8ArrayInput ): Uint8Array
 	if ( typeof input === 'string' ) {
 		input = stringToBytes( input )
 	}
+
+	if ( input instanceof DataView ) {		
+		return (
+			new Uint8Array( input.buffer )
+				.subarray( input.byteOffset, input.byteOffset + input.byteLength )
+		)
+	}
+
 
 	if (
 		input instanceof BigInt64Array ||

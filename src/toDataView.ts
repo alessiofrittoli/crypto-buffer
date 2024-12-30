@@ -22,7 +22,6 @@ export const toDataView = ( input: ToDataViewInput ): DataView => {
 	}
 
 	if ( Array.isArray( input ) ) {
-		// return toDataView( new Uint8Array( input ).buffer )
 		return toDataView( new Uint8Array( input ) )
 	}
 
