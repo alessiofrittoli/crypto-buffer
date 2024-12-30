@@ -15,6 +15,7 @@ Version 3.0.0
 		- [stringToBinary](#stringtobinary)
 		- [stringToBytes](#stringtobytes)
 		- [binaryToString](#binarytostring)
+	- [Coercion Utilities](#coercion-utilities)
 - [Security](#security)
 - [Credits](#made-with-)
 
@@ -152,22 +153,22 @@ try {
 
 ---
 
-#### `Common Utilities`
+#### Common Utilities
 
 ##### `bufferEquals`
 
-The `bufferEquals` function leverages the [toDataView](#todataview) utility to normalize input buffers into `DataView` objects for consistent byte-level comparison.
+The `bufferEquals` function leverages the `coerceToUint8Array` utility function to normalize input data into `Uint8Array` objects for consistent byte-level comparison.
 
-It first checks the byte lengths of the two buffers to ensure they are identical. If the lengths match, it performs a byte-by-byte comparison using the `getUint8` method of `DataView`.
+It first checks the byte lengths of the two buffers to ensure they are identical. If the lengths match, it performs a byte-by-byte comparison.
 
 <details>
 
 <summary>Parameters</summary>
 
-| Parameter | Type              | Description                                  |
-|-----------|-------------------|----------------------------------------------|
-| `buffer1` | `ToDataViewInput` | The first buffer to compare.                 |
-| `buffer2` | `ToDataViewInput` | The second buffer to compare with `buffer1`. |
+| Parameter | Type                      | Description                                  |
+|-----------|---------------------------|----------------------------------------------|
+| `buffer1` | `CoerceToUint8ArrayInput` | The first input to compare.                  |
+| `buffer2` | `CoerceToUint8ArrayInput` | The second input to compare with `buffer1`.  |
 
 </details>
 
@@ -204,7 +205,7 @@ console.log( bufferEquals( buffer1, buffer3 ) ) // false
 
 ---
 
-#### `Conversion Utilities`
+#### Conversion Utilities
 
 ##### `stringToBinary`
 
@@ -361,6 +362,12 @@ console.log( binaryToString( uint8Array ) )
 ```
 
 </details>
+
+---
+
+#### Coercion Utilities
+
+##### Docs coming soon
 
 ---
 
