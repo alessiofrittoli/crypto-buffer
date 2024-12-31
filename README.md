@@ -8,14 +8,21 @@ Version 3.1.0
 
 - [Getting started](#getting-started)
 - [Utilities](#utilities)
-	- [toDataView](#todataview)
+	- [`toDataView`](#todataview)
 	- [Common Utilities](#common-utilities)
-		- [bufferEquals](#bufferequals)
+		- [`bufferEquals`](#bufferequals)
 	- [Conversion Utilities](#conversion-utilities)
-		- [stringToBinary](#stringtobinary)
-		- [stringToBytes](#stringtobytes)
-		- [binaryToString](#binarytostring)
+		- [`stringToBinary`](#stringtobinary)
+		- [`stringToBytes`](#stringtobytes)
+		- [`binaryToString`](#binarytostring)
 	- [Coercion Utilities](#coercion-utilities)
+		- [`coerceToUint8Array`](#coercetouint8array)
+		- [`coerceToFloatArray`](#coercetofloatarray)
+		- [`coerceToFloat32Array`](#coercetofloat32array)
+		- [`coerceToFloat64Array`](#coercetofloat64array)
+		- [`coerceToBigArray`](#coercetobigarray)
+		- [`coerceToBigInt64Array`](#coercetobigint64array)
+		- [`coerceToBigUint64Array`](#coercetobiguint64array)
 - [Security](#security)
 - [Credits](#made-with-)
 
@@ -49,17 +56,9 @@ The `toDataView` function is a utility designed to convert various data types in
 type ToDataViewInput = (
 	| string
 	| Array<number>
-	| ArrayLike<number>
 	| Buffer
 	| ArrayBuffer
-	| ArrayBufferLike
-	| Int8Array
-	| Int16Array
-	| Int32Array
-	| Uint8Array
-	| Uint16Array
-	| Uint32Array
-	| Uint8ClampedArray
+	| NodeJS.TypedArray
 )
 ```
 
@@ -71,20 +70,14 @@ type ToDataViewInput = (
 |-----------|-------------------|-------------------------------------------------------------------------|
 | `input`   | `ToDataViewInput` | The data to be converted into a `DataView`. Possible input Type can be: |
 |           |                   | - `string`                                                              |
-|           |                   | - `Array<number>`                                                       |
-|           |                   | - `ArrayLike<number>`                                                   |
+|           |                   | - `Array<number>` (array of bytes)                                      |
 |           |                   | - `Buffer`                                                              |
 |           |                   | - `ArrayBuffer`                                                         |
-|           |                   | - `ArrayBufferLike`                                                     |
-|           |                   | - `Int8Array`                                                           |
-|           |                   | - `Int16Array`                                                          |
-|           |                   | - `Int32Array`                                                          |
-|           |                   | - `Uint8Array`                                                          |
-|           |                   | - `Uint16Array`                                                         |
-|           |                   | - `Uint32Array`                                                         |
-|           |                   | - `Uint8ClampedArray`                                                   |
+|           |                   | - `NodeJS.TypedArray`                                                   |
 
 </details>
+
+---
 
 <details>
 
@@ -96,6 +89,8 @@ The function returns a `DataView` object created from the input data.
 
 </details>
 
+---
+
 <details>
 
 <summary>Errors</summary>
@@ -103,6 +98,8 @@ The function returns a `DataView` object created from the input data.
 Throws a `TypeError` if the input does not match any of the supported types.
 
 </details>
+
+---
 
 <details>
 
@@ -165,12 +162,14 @@ It first checks the byte lengths of the two buffers to ensure they are identical
 
 <summary>Parameters</summary>
 
-| Parameter | Type                      | Description                                  |
-|-----------|---------------------------|----------------------------------------------|
-| `buffer1` | `CoerceToUint8ArrayInput` | The first input to compare.                  |
-| `buffer2` | `CoerceToUint8ArrayInput` | The second input to compare with `buffer1`.  |
+| Parameter | Type                      | Description                                 |
+|-----------|---------------------------|---------------------------------------------|
+| `buffer1` | `CoerceToUint8ArrayInput` | The first input to compare.                 |
+| `buffer2` | `CoerceToUint8ArrayInput` | The second input to compare with `buffer1`. |
 
 </details>
+
+---
 
 <details>
 
@@ -181,6 +180,8 @@ Type: `boolean`
 `true` if the buffers are equal, `false` otherwise.
 
 </details>
+
+---
 
 <details>
 
@@ -221,6 +222,8 @@ The `stringToBinary` function is a utility for converting a string into a `Uint8
 
 </details>
 
+---
+
 <details>
 
 <summary>Returns</summary>
@@ -230,6 +233,8 @@ Type: `Uint8Array`
 The function returns a new `Uint8Array` instance.
 
 </details>
+
+---
 
 <details>
 
@@ -255,7 +260,7 @@ console.log( new TextDecoder().decode( binary ) )
 
 ##### `stringToBytes`
 
-The `stringToBytes` function converts a string into an Array of bytes (`number[]`). It leverages the [stringToBinary](#stringToBinary) utility to handle string-to-binary conversion, ensuring compatibility with both browser and Node.js environments. The resulting array represents the byte values of the input string.
+The `stringToBytes` function converts a string into an Array of bytes (`number[]`). It leverages the [stringToBinary](#stringtobinary) utility to handle string-to-binary conversion, ensuring compatibility with both browser and Node.js environments. The resulting array represents the byte values of the input string.
 
 <details>
 
@@ -267,6 +272,8 @@ The `stringToBytes` function converts a string into an Array of bytes (`number[]
 
 </details>
 
+---
+
 <details>
 
 <summary>Returns</summary>
@@ -276,6 +283,8 @@ Type: `number[]`
 The function returns an array of bytes (`number[]`), where each element represents a single byte of the input string.
 
 </details>
+
+---
 
 <details>
 
@@ -308,21 +317,13 @@ It is designed to be cross-platform, working in both Node.js and browser environ
 
 <summary>Parameters</summary>
 
-| Parameter | Type                  | Description                                       |
-|-----------|-----------------------|---------------------------------------------------|
-| `input`   | `BinaryToStringInput` | The binary data to be converted to a string.      |
-|           |                       | - `Array<number>` - A simple array of bytes.      |
-|           |                       | - `Buffer` - Node.js buffer instance.             |
-|           |                       | - `ArrayBuffer` - Generic buffer for binary data. |
-|           |                       | - `Int8Array`                                     |
-|           |                       | - `Int16Array`                                    |
-|           |                       | - `Int32Array`                                    |
-|           |                       | - `Uint8Array`                                    |
-|           |                       | - `Uint16Array`                                   |
-|           |                       | - `Uint32Array`                                   |
-|           |                       | - `Uint8ClampedArray`                             |
+| Parameter | Type                      | Description |
+|-----------|---------------------------|-------------|
+| `input`   | `CoerceToUint8ArrayInput` | The binary data to be converted to a string. See [coerceToUint8Array](#coercetouint8array) for a list of possible input data types. |
 
 </details>
+
+---
 
 <details>
 
@@ -333,6 +334,8 @@ Type `string`
 A string representation of the given input.
 
 </details>
+
+---
 
 <details>
 
@@ -367,7 +370,321 @@ console.log( binaryToString( uint8Array ) )
 
 #### Coercion Utilities
 
-##### Docs coming soon
+This module provides a set of utility functions for coercing data into specific array types, such as `Uint8Array`, `Float32Array`, `Float64Array`, `BigInt64Array`, and `BigUint64Array`.\
+It supports various input types and ensures compatibility across different data representations.
+
+---
+
+##### `coerceToUint8Array`
+
+Coerces input data into a `Uint8Array`.
+
+###### Input Type
+
+```ts
+type CoerceToUint8ArrayInput = (
+	| string
+	| Array<number>
+	| DataView
+	| Buffer
+	| ArrayBuffer
+	| NodeJS.TypedArray
+)
+```
+
+<details>
+
+<summary>Parameters</summary>
+
+| Parameter | Type              | Description                                                             |
+|-----------|-------------------|-------------------------------------------------------------------------|
+| `input`   | `CoerceToUint8ArrayInput` | The input data to convert. Possible input Type can be:          |
+|           |                   | - `string`                                                              |
+|           |                   | - `Array<number>` (array of bytes)                                      |
+|           |                   | - `DataView`                                                            |
+|           |                   | - `Buffer`                                                              |
+|           |                   | - `ArrayBuffer`                                                         |
+|           |                   | - `NodeJS.TypedArray`                                                   |
+
+</details>
+
+---
+
+<details>
+
+<summary>Returns</summary>
+
+Type: `Uint8Array`
+
+The function returns a new `Uint8Array` instance created from the input data.
+
+</details>
+
+---
+
+<details>
+
+<summary>Usage</summary>
+
+###### Converting a String to Uint8Array
+
+```ts
+import { coerceToUint8Array } from '@alessiofrittoli/crypto-buffer'
+// or
+import { coerceToUint8Array } from '@alessiofrittoli/crypto-buffer/coercion'
+
+const buffer = coerceToUint8Array( 'Hello, World!' )
+```
+
+###### Converting a DataView to Uint8Array
+
+```ts
+import { coerceToUint8Array } from '@alessiofrittoli/crypto-buffer'
+// or
+import { coerceToUint8Array } from '@alessiofrittoli/crypto-buffer/coercion'
+import { toDataView } from '@alessiofrittoli/crypto-buffer/toDataView'
+import { stringToBinary } from '@alessiofrittoli/crypto-buffer/conversion'
+
+const view = toDataView( stringToBinary( 'Hello, World!' ) )
+
+console.log( coerceToUint8Array( view ) )
+```
+
+</details>
+
+---
+
+##### `coerceToFloatArray`
+
+Coerces input data into a `Float32Array` or `Float64Array`, based on the specified bit size.
+
+<details>
+
+<summary>Parameters</summary>
+
+| Parameter | Type       | Description |
+|-----------|------------|-------------|
+| `input`   | `CoerceToUint8ArrayInput` | The input data to convert. See [coerceToUint8Array](#coercetouint8array) for a list of possible input data types. |
+| `bit`     | `32 \| 64` | Specifies whether to return a `Float32Array` (32-bit) or `Float64Array` (64-bit). |
+
+</details>
+
+---
+
+<details>
+
+<summary>Returns</summary>
+
+Type: `Float32Array | Float64Array`
+
+A new instance of the respective float array type.
+
+</details>
+
+---
+
+##### `coerceToFloat32Array`
+
+A specialized version of `coerceToFloatArray` that coerces input data into a `Float32Array`.
+
+<details>
+
+<summary>Parameters</summary>
+
+| Parameter | Type       | Description |
+|-----------|------------|-------------|
+| `input`   | `CoerceToUint8ArrayInput` | The input data to convert. See [coerceToUint8Array](#coercetouint8array) for a list of possible input data types. |
+
+</details>
+
+---
+
+<details>
+
+<summary>Returns</summary>
+
+Type: `Float32Array`
+
+A new instance of `Float32Array`.
+
+</details>
+
+---
+
+<details>
+
+<summary>Usage</summary>
+
+```ts
+import { coerceToFloat32Array } from '@alessiofrittoli/crypto-buffer'
+// or
+import { coerceToFloat32Array } from '@alessiofrittoli/crypto-buffer/coercion'
+
+const float32Array = coerceToFloat32Array( 'Hello, World!' )
+```
+
+</details>
+
+---
+
+##### `coerceToFloat64Array`
+
+A specialized version of `coerceToFloatArray` that coerces input data into a `Float64Array`.
+
+<details>
+
+<summary>Parameters</summary>
+
+| Parameter | Type       | Description |
+|-----------|------------|-------------|
+| `input`   | `CoerceToUint8ArrayInput` | The input data to convert. See [coerceToUint8Array](#coercetouint8array) for a list of possible input data types. |
+
+</details>
+
+---
+
+<details>
+
+<summary>Returns</summary>
+
+Type: `Float64Array`
+
+A new instance of `Float64Array`.
+
+</details>
+
+---
+
+<details>
+
+<summary>Usage</summary>
+
+```ts
+import { coerceToFloat64Array } from '@alessiofrittoli/crypto-buffer'
+// or
+import { coerceToFloat64Array } from '@alessiofrittoli/crypto-buffer/coercion'
+
+const float64Array = coerceToFloat64Array( 'Hello, World!' )
+```
+
+</details>
+
+---
+
+##### `coerceToBigArray`
+
+Coerces input data into a `BigInt64Array` or `BigUint64Array` based on the `isUnsigned` parameter.
+
+<details>
+
+<summary>Parameters</summary>
+
+| Parameter    | Type       | Description |
+|--------------|------------|-------------|
+| `input`      | `CoerceToUint8ArrayInput` | The input data to convert. See [coerceToUint8Array](#coercetouint8array) for a list of possible input data types. |
+| `isUnsigned` | `boolean`  | If `true`, returns a `BigUint64Array`, `BigInt64Array` otherwise. |
+
+</details>
+
+---
+
+<details>
+
+<summary>Returns</summary>
+
+Type: `BigInt64Array | BigUint64Array`
+
+A new instance of the respective big integer array type.
+
+</details>
+
+---
+
+##### `coerceToBigInt64Array`
+
+A specialized version of `coerceToFloatArray` that coerces input data into a `BigInt64Array`.
+
+<details>
+
+<summary>Parameters</summary>
+
+| Parameter | Type       | Description |
+|-----------|------------|-------------|
+| `input`   | `CoerceToUint8ArrayInput` | The input data to convert. See [coerceToUint8Array](#coercetouint8array) for a list of possible input data types. |
+
+</details>
+
+---
+
+<details>
+
+<summary>Returns</summary>
+
+Type: `BigInt64Array`
+
+A new instance of `BigInt64Array`.
+
+</details>
+
+---
+
+<details>
+
+<summary>Usage</summary>
+
+```ts
+import { coerceToBigInt64Array } from '@alessiofrittoli/crypto-buffer'
+// or
+import { coerceToBigInt64Array } from '@alessiofrittoli/crypto-buffer/coercion'
+
+const bigInt64Array = coerceToBigInt64Array( 'Hello, World!' )
+```
+
+</details>
+
+---
+
+##### `coerceToBigUint64Array`
+
+A specialized version of `coerceToFloatArray` that coerces input data into a `BigUint64Array`.
+
+<details>
+
+<summary>Parameters</summary>
+
+| Parameter | Type       | Description |
+|-----------|------------|-------------|
+| `input`   | `CoerceToUint8ArrayInput` | The input data to convert. See [coerceToUint8Array](#coercetouint8array) for a list of possible input data types. |
+
+</details>
+
+---
+
+<details>
+
+<summary>Returns</summary>
+
+Type: `BigUint64Array`
+
+A new instance of `BigUint64Array`.
+
+</details>
+
+---
+
+<details>
+
+<summary>Usage</summary>
+
+```ts
+import { coerceToBigUint64Array } from '@alessiofrittoli/crypto-buffer'
+// or
+import { coerceToBigUint64Array } from '@alessiofrittoli/crypto-buffer/coercion'
+
+const bigUint64Array = coerceToBigUint64Array( 'Hello, World!' )
+```
+
+</details>
 
 ---
 
