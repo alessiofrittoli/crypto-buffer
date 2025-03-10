@@ -6,6 +6,7 @@ import { stringToBytes } from '@/conversion'
  */
 export type CoerceToUint8ArrayInput = (
 	| string
+	| number
 	| Array<number>
 	| DataView
 	| Buffer
@@ -22,6 +23,11 @@ export type CoerceToUint8ArrayInput = (
  */
 export const coerceToUint8Array = ( input: CoerceToUint8ArrayInput ): Uint8Array => {
 
+
+	if ( typeof input === 'number' ) {
+		input = input.toString()
+	}
+	
 	if ( typeof input === 'string' ) {
 		input = stringToBytes( input )
 	}
