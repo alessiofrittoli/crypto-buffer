@@ -22,7 +22,6 @@ describe( 'unicodeToBinarySequence', () => {
 
 		expect( unicodeToBinarySequence( 'Hello world!' ) )
 			.toBe( '01001000 01100101 01101100 01101100 01101111 00100000 01110111 01101111 01110010 01101100 01100100 00100001' )
-		// console.log( binaryToString( binarySequenceToUint8Array( '001101' ) ) )
 
 	} )
 

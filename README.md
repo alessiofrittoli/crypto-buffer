@@ -1,6 +1,14 @@
 # Crypto Buffer 🚌
 
-Version 3.2.0
+[![NPM Latest Version][version-badge]][npm-url] [![Coverage Status][coverage-badge]][coverage-url] [![NPM Monthly Downloads][downloads-badge]][npm-url] [![Dependencies][deps-badge]][deps-url]
+
+[version-badge]: https://img.shields.io/npm/v/%40alessiofrittoli%2Fcrypto-buffer
+[npm-url]: https://npmjs.org/package/%40alessiofrittoli%2Fcrypto-buffer
+[coverage-badge]: https://coveralls.io/repos/github/alessiofrittoli/crypto-buffer/badge.svg
+[coverage-url]: https://coveralls.io/github/alessiofrittoli/crypto-buffer
+[downloads-badge]: https://img.shields.io/npm/dm/%40alessiofrittoli%2Fcrypto-buffer.svg
+[deps-badge]: https://img.shields.io/librariesio/release/npm/%40alessiofrittoli%2Fcrypto-buffer
+[deps-url]: https://libraries.io/npm/%40alessiofrittoli%2Fcrypto-buffer
 
 ## Lightweight TypeScript Node.js Buffers utility library
 
@@ -8,22 +16,30 @@ Version 3.2.0
 
 - [Getting started](#getting-started)
 - [Utilities](#utilities)
-	- [`toDataView`](#todataview)
-	- [Common Utilities](#common-utilities)
-		- [`bufferEquals`](#bufferequals)
-	- [Conversion Utilities](#conversion-utilities)
-		- [`stringToBinary`](#stringtobinary)
-		- [`stringToBytes`](#stringtobytes)
-		- [`binaryToString`](#binarytostring)
-	- [Coercion Utilities](#coercion-utilities)
-		- [`coerceToUint8Array`](#coercetouint8array)
-		- [`coerceToFloatArray`](#coercetofloatarray)
-		- [`coerceToFloat32Array`](#coercetofloat32array)
-		- [`coerceToFloat64Array`](#coercetofloat64array)
-		- [`coerceToBigArray`](#coercetobigarray)
-		- [`coerceToBigInt64Array`](#coercetobigint64array)
-		- [`coerceToBigUint64Array`](#coercetobiguint64array)
-- [Security](#security)
+  - [`toDataView`](#todataview)
+  - [Common Utilities](#common-utilities)
+    - [`bufferEquals`](#bufferequals)
+  - [Conversion Utilities](#conversion-utilities)
+    - [`stringToBinary`](#stringtobinary)
+    - [`stringToBytes`](#stringtobytes)
+    - [`binaryToString`](#binarytostring)
+    - [`unicodeToBinarySequence`](#unicodetobinarysequence)
+    - [`binarySequenceToUint8Array`](#binarysequencetouint8array)
+  - [Coercion Utilities](#coercion-utilities)
+    - [`coerceToUint8Array`](#coercetouint8array)
+    - [`coerceToFloatArray`](#coercetofloatarray)
+    - [`coerceToFloat32Array`](#coercetofloat32array)
+    - [`coerceToFloat64Array`](#coercetofloat64array)
+    - [`coerceToBigArray`](#coercetobigarray)
+    - [`coerceToBigInt64Array`](#coercetobigint64array)
+    - [`coerceToBigUint64Array`](#coercetobiguint64array)
+- [Development](#development)
+  - [Install depenendencies](#install-depenendencies)
+  - [Build the source code](#build-the-source-code)
+  - [ESLint](#eslint)
+  - [Jest](#jest)
+  - [Contributing](#contributing)
+  - [Security](#security)
 - [Credits](#made-with-)
 
 ---
@@ -54,11 +70,11 @@ The `toDataView` function is a utility designed to convert various data types in
 
 ```ts
 type ToDataViewInput = (
-	| string
-	| Array<number>
-	| Buffer
-	| ArrayBuffer
-	| NodeJS.TypedArray
+  | string
+  | Array<number>
+  | Buffer
+  | ArrayBuffer
+  | NodeJS.TypedArray
 )
 ```
 
@@ -139,10 +155,10 @@ import { toDataView } from '@alessiofrittoli/crypto-buffer'
 import { toDataView } from '@alessiofrittoli/crypto-buffer/toDataView'
 
 try {
-	const invalidInput = { foo: 'bar' }
-	const view = toDataView( invalidInput )
+  const invalidInput = { foo: 'bar' }
+  const view = toDataView( invalidInput )
 } catch ( error ) {
-	console.error( error.message ) // Expected `input` to be a Expected `input` to be a string, Array<number>, ...
+  console.error( error.message ) // Expected `input` to be a Expected `input` to be a string, Array<number>, ...
 }
 ```
 
@@ -368,6 +384,102 @@ console.log( binaryToString( uint8Array ) )
 
 ---
 
+##### `unicodeToBinarySequence`
+
+The `unicodeToBinarySequence` function converts unicode characters to a 0-1 binary sequence.
+
+<details>
+
+<summary>Parameters</summary>
+
+| Parameter | Type                      | Description |
+|-----------|---------------------------|-------------|
+| `input`   | `CoerceToUint8ArrayInput` | The data to convert. See [coerceToUint8Array](#coercetouint8array) for a list of possible input data types. |
+
+</details>
+
+---
+
+<details>
+
+<summary>Returns</summary>
+
+Type `string`
+
+The 0-1 converted binary sequence.
+
+</details>
+
+---
+
+<details>
+
+<summary>Example usage</summary>
+
+```ts
+import { unicodeToBinarySequence } from '@alessiofrittoli/crypto-buffer'
+// or
+import { unicodeToBinarySequence } from '@alessiofrittoli/crypto-buffer/conversion'
+
+console.log( unicodeToBinarySequence( 'Hello world!' ) )
+// Outputs: '01001000 01100101 01101100 01101100 01101111 00100000 01110111 01101111 01110010 01101100 01100100 00100001'
+
+console.log( unicodeToBinarySequence( 'Hello world!', '-' ) )
+// Outputs: '01001000-01100101-01101100-01101100-01101111-00100000-01110111-01101111-01110010-01101100-01100100-00100001'
+```
+
+</details>
+
+---
+
+##### `binarySequenceToUint8Array`
+
+The `binarySequenceToUint8Array` function converts a 0-1 binary sequence to `Uint8Array`.
+
+<details>
+
+<summary>Parameters</summary>
+
+| Parameter | Type                      | Description |
+|-----------|---------------------------|-------------|
+| `input`   | `CoerceToUint8ArrayInput` | The data to convert. See [coerceToUint8Array](#coercetouint8array) for a list of possible input data types. |
+
+</details>
+
+---
+
+<details>
+
+<summary>Returns</summary>
+
+Type `Uint8Array`
+
+A new Uint8Array instance.
+
+</details>
+
+---
+
+<details>
+
+<summary>Example usage</summary>
+
+```ts
+import { binarySequenceToUint8Array } from '@alessiofrittoli/crypto-buffer'
+// or
+import { binarySequenceToUint8Array } from '@alessiofrittoli/crypto-buffer/conversion'
+
+console.log( binaryToString( binarySequenceToUint8Array( '01001000 01100101 01101100 01101100 01101111 00100000 01110111 01101111 01110010 01101100 01100100 00100001' ) ) )
+// Outputs: 'Hello world!'
+
+console.log( binaryToString( binarySequenceToUint8Array( '01001000-01100101-01101100-01101100-01101111-00100000-01110111-01101111-01110010-01101100-01100100-00100001', '-' ) ) )
+// Outputs: 'Hello world!'
+```
+
+</details>
+
+---
+
 #### Coercion Utilities
 
 This module provides a set of utility functions for coercing data into specific array types, such as `Uint8Array`, `Float32Array`, `Float64Array`, `BigInt64Array`, and `BigUint64Array`.\
@@ -383,12 +495,13 @@ Coerces input data into a `Uint8Array`.
 
 ```ts
 type CoerceToUint8ArrayInput = (
-	| string
-	| Array<number>
-	| DataView
-	| Buffer
-	| ArrayBuffer
-	| NodeJS.TypedArray
+  | string
+  | number
+  | Array<number>
+  | DataView
+  | Buffer
+  | ArrayBuffer
+  | NodeJS.TypedArray
 )
 ```
 
@@ -400,6 +513,7 @@ type CoerceToUint8ArrayInput = (
 |-----------|-------------------|-------------------------------------------------------------------------|
 | `input`   | `CoerceToUint8ArrayInput` | The input data to convert. Possible input Type can be:          |
 |           |                   | - `string`                                                              |
+|           |                   | - `number` (will be automatically converted to string)                  |
 |           |                   | - `Array<number>` (array of bytes)                                      |
 |           |                   | - `DataView`                                                            |
 |           |                   | - `Buffer`                                                              |
@@ -688,7 +802,7 @@ const bigUint64Array = coerceToBigUint64Array( 'Hello, World!' )
 
 ---
 
-<!-- ### Development
+### Development
 
 #### Install depenendencies
 
@@ -702,9 +816,9 @@ or using `pnpm`
 pnpm i
 ```
 
-#### Build your source code
+#### Build the source code
 
-Run the following command to build code for distribution.
+Run the following command to test and build code for distribution.
 
 ```bash
 pnpm build
@@ -724,15 +838,15 @@ Run all the defined test suites by running the following:
 
 ```bash
 # Run tests and watch file changes.
-pnpm test
+pnpm test:watch
 
-# Run tests in a Jest JSDOM environment.
+# Run tests and watch file changes with jest-environment-jsdom.
 pnpm test:jsdom
 
 # Run tests in a CI environment.
 pnpm test:ci
 
-# Run tests in a Jest JSDOM and CI environment.
+# Run tests in a CI environment with jest-environment-jsdom.
 pnpm test:ci:jsdom
 ```
 
@@ -740,10 +854,17 @@ You can eventually run specific suits like so:
 
 ```bash
 pnpm test:jest
-pnpm test:conversion
-pnpm test:conversion:jsdom
-pnpm test:todataview
-pnpm test:todataview:jsdom
+pnpm test:jest:jsdom
+```
+
+Run tests with coverage.
+
+An HTTP server is then started to serve coverage files from `./coverage` folder.
+
+⚠️ You may see a blank page the first time you run this command. Simply refresh the browser to see the updates.
+
+```bash
+test:coverage:serve
 ```
 
 ---
@@ -753,7 +874,7 @@ pnpm test:todataview:jsdom
 Contributions are truly welcome!\
 Please refer to the [Contributing Doc](./CONTRIBUTING.md) for more information on how to start contributing to this project.
 
---- -->
+---
 
 ### Security
 
@@ -762,30 +883,30 @@ If you believe you have found a security vulnerability, we encourage you to **_r
 ### Made with ☕
 
 <table style='display:flex;gap:20px;'>
-	<tbody>
-		<tr>
-			<td>
-				<img src='https://avatars.githubusercontent.com/u/35973186' style='width:60px;border-radius:50%;object-fit:contain;'>
-			</td>
-			<td>
-				<table style='display:flex;gap:2px;flex-direction:column;'>
-					<tbody>
-						<tr>
-							<td>
-								<a href='https://github.com/alessiofrittoli' target='_blank' rel='noopener'>Alessio Frittoli</a>
-							</td>
-						</tr>
-						<tr>
-							<td>
-								<small>
-									<a href='https://alessiofrittoli.it' target='_blank' rel='noopener'>https://alessiofrittoli.it</a> |
-									<a href='mailto:info@alessiofrittoli.it' target='_blank' rel='noopener'>info@alessiofrittoli.it</a>
-								</small>
-							</td>
-						</tr>
-					</tbody>
-				</table>
-			</td>
-		</tr>
-	</tbody>
+  <tbody>
+    <tr>
+      <td>
+        <img src='https://avatars.githubusercontent.com/u/35973186' style='width:60px;border-radius:50%;object-fit:contain;'>
+      </td>
+      <td>
+        <table style='display:flex;gap:2px;flex-direction:column;'>
+          <tbody>
+            <tr>
+              <td>
+                <a href='https://github.com/alessiofrittoli' target='_blank' rel='noopener'>Alessio Frittoli</a>
+              </td>
+            </tr>
+            <tr>
+              <td>
+                <small>
+                  <a href='https://alessiofrittoli.it' target='_blank' rel='noopener'>https://alessiofrittoli.it</a> |
+                  <a href='mailto:info@alessiofrittoli.it' target='_blank' rel='noopener'>info@alessiofrittoli.it</a>
+                </small>
+              </td>
+            </tr>
+          </tbody>
+        </table>
+      </td>
+    </tr>
+  </tbody>
 </table>

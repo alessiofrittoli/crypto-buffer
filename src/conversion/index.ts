@@ -26,15 +26,17 @@ export const unicodeToBinarySequence = ( input: CoerceToUint8ArrayInput, separat
 
 
 /**
- * Convert a 0-1 binary string to Uint8Array.
+ * Convert a 0-1 binary sequence to Uint8Array.
  * 
- * @param input The 0-1 binary string to convert.
+ * @param input The 0-1 binary to convert.
  * @returns A new Uint8Array instance.
  */
-export const binarySequenceToUint8Array = ( input: string, separator = ' ' ) => (
+export const binarySequenceToUint8Array = ( input: CoerceToUint8ArrayInput, separator = ' ' ) => (
 	new Uint8Array(
-		( separator === '' ? ( input.match( /.{1,8}/g ) || [] ) : input.split( separator ) )
-			.map( bin => parseInt( bin, 2 ) )
+		( separator === ''
+			? ( binaryToString( input ).match( /.{1,8}/g ) || [] )
+			: binaryToString( input ).split( separator )
+		).map( bin => parseInt( bin, 2 ) )
 	)
 )
 
