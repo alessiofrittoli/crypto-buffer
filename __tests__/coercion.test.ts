@@ -28,6 +28,12 @@ describe( 'coerceToUint8Array', () => {
 		expect( coerceToUint8Array( rawValue ).byteLength )
 			.toBe( bytes.length )
 	} )
+	
+	
+	it( 'supports number input' + clientSuffix, () => {
+		expect( coerceToUint8Array( 10 ).byteLength )
+			.toBe( stringToBytes( ( 10 ).toString() ).length )
+	} )
 
 
 	it( 'supports Array of bytes' + clientSuffix, () => {
