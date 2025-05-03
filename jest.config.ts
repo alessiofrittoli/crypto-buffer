@@ -1,6 +1,20 @@
 import type { JestConfigWithTsJest } from 'ts-jest'
 import dotenv from 'dotenv'
 
+
+console.log(
+`
+__________________________________________
+        ____        ________         
+       / __ )__  __/ __/ __/__  _____
+      / __  / / / / /_/ /_/ _ \\/ ___/
+     / /_/ / /_/ / __/ __/  __/ /    
+    /_____/\\__,_/_/ /_/  \\___/_/     
+__________________________________________
+`
+)
+
+
 const env = process.env.NODE_ENV
 
 dotenv.config( { path: [
