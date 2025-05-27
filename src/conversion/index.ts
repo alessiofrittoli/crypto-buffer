@@ -58,7 +58,19 @@ export const stringToBytes = ( input: string ): number[] => (
  * @param input The input data to convert.
  * @returns The string representation of the given input.
  */
-export const binaryToString = ( input: CoerceToUint8ArrayInput ) => {
+export const binaryToString = ( input: CoerceToUint8ArrayInput ) => (
+	new TextDecoder()
+		.decode( coerceToUint8Array( input ) )
+)
+
+
+/**
+ * Return the binary string representation of the given binary data.
+ * 
+ * @param input The input data to convert.
+ * @returns The string representation of the given input.
+ */
+export const binaryToBinaryString = ( input: CoerceToUint8ArrayInput ) => {
 	
 	const uint8Array = coerceToUint8Array( input )
 	let binary = ''
