@@ -1,4 +1,4 @@
-import { binarySequenceToUint8Array, binaryToString, unicodeToBinarySequence, stringToBinary, stringToBytes } from '@/conversion'
+import { binarySequenceToUint8Array, binaryToString, unicodeToBinarySequence, stringToBinary, stringToBytes, binaryToBinaryString } from '@/conversion'
 
 export const runConversionUnitTests = () => {
 	
@@ -113,6 +113,73 @@ export const runConversionUnitTests = () => {
 	
 		it( 'supports Uint8ClampedArray' + clientSuffix, () => {
 			expect( binaryToString( new Uint8ClampedArray( stringToBytes( rawData ) ) ) )
+				.toBe( rawData )
+		} )
+	
+	} )
+	
+	
+	describe( 'binaryToBinaryString', () => {
+	
+		const rawData = 'Hello world!'
+	
+		it( 'supports Array of bytes' + clientSuffix, () => {
+			expect( binaryToBinaryString( stringToBytes( rawData ) ) )
+				.toBe( rawData )
+		} )
+	
+	
+		it( 'supports Buffer' + clientSuffix, () => {
+			expect( binaryToBinaryString( stringToBinary( rawData ) ) )
+				.toBe( rawData )
+		} )
+	
+	
+		it( 'supports ArrayBuffer' + clientSuffix, () => {
+			const arrayBuffer = new Uint8Array( stringToBytes( rawData ) ).buffer
+			expect( binaryToBinaryString( arrayBuffer ) )
+				.toBe( rawData )
+		} )
+	
+	
+		it( 'supports Int8Array' + clientSuffix, () => {
+			expect( binaryToBinaryString( new Int8Array( stringToBytes( rawData ) ) ) )
+				.toBe( rawData )
+		} )
+			
+			
+		it( 'supports Int16Array' + clientSuffix, () => {		
+			expect( binaryToBinaryString( new Int16Array( stringToBytes( rawData ) ) ) )
+				.toBe( rawData )
+		} )
+	
+	
+		it( 'supports Int32Array' + clientSuffix, () => {
+			expect( binaryToBinaryString( new Int32Array( stringToBytes( rawData ) ) ) )
+				.toBe( rawData )
+		} )
+	
+	
+		it( 'supports Uint8Array' + clientSuffix, () => {
+			expect( binaryToBinaryString( new Uint8Array( stringToBytes( rawData ) ) ) )
+				.toBe( rawData )
+		} )
+	
+	
+		it( 'supports Uint16Array' + clientSuffix, () => {
+			expect( binaryToBinaryString( new Uint16Array( stringToBytes( rawData ) ) ) )
+				.toBe( rawData )
+		} )
+	
+	
+		it( 'supports Uint32Array' + clientSuffix, () => {
+			expect( binaryToBinaryString( new Uint32Array( stringToBytes( rawData ) ) ) )
+				.toBe( rawData )
+		} )
+	
+	
+		it( 'supports Uint8ClampedArray' + clientSuffix, () => {
+			expect( binaryToBinaryString( new Uint8ClampedArray( stringToBytes( rawData ) ) ) )
 				.toBe( rawData )
 		} )
 	
