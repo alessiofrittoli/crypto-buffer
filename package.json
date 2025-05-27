@@ -1,6 +1,6 @@
 {
 	"name": "@alessiofrittoli/crypto-buffer",
-	"version": "3.6.1",
+	"version": "3.6.2",
 	"description": "Lightweight TypeScript Node.js Buffers utility library",
 	"author": {
 		"name": "Alessio Frittoli",
