@@ -53,7 +53,7 @@ export const stringToBytes = ( input: string ): number[] => (
 
 
 /**
- * Return the binary string representation of the given binary data.
+ * Return the string representation of the given binary data.
  * 
  * @param input The input data to convert.
  * @returns The string representation of the given input.
@@ -65,12 +65,14 @@ export const binaryToString = ( input: CoerceToUint8ArrayInput ) => (
 
 
 /**
- * Return the binary string representation of the given binary data.
+ * Return the string representation of the given binary data with Latin1 characters.
+ * 
+ * This conversion ensure the output to be Latin1 (ISO-8859-1) — 8-bit characters in the range 0–255.
  * 
  * @param input The input data to convert.
  * @returns The string representation of the given input.
  */
-export const binaryToBinaryString = ( input: CoerceToUint8ArrayInput ) => {
+export const binaryToLatin1String = ( input: CoerceToUint8ArrayInput ) => {
 	
 	const uint8Array = coerceToUint8Array( input )
 	let binary = ''
