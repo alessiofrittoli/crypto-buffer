@@ -76,27 +76,18 @@ The `toDataView` function is a utility designed to convert various data types in
 ##### Input Type
 
 ```ts
-type ToDataViewInput = (
-  | string
-  | Array<number>
-  | Buffer
-  | ArrayBuffer
-  | NodeJS.TypedArray
-)
+type ToDataViewInput = CoerceToUint8ArrayInput
 ```
+
+- See [`CoerceToUint8ArrayInput`](#input-type-1)
 
 <details>
 
 <summary>Parameters</summary>
 
-| Parameter | Type              | Description                                                             |
-|-----------|-------------------|-------------------------------------------------------------------------|
-| `input`   | `ToDataViewInput` | The data to be converted into a `DataView`. Possible input Type can be: |
-|           |                   | - `string`                                                              |
-|           |                   | - `Array<number>` (array of bytes)                                      |
-|           |                   | - `Buffer`                                                              |
-|           |                   | - `ArrayBuffer`                                                         |
-|           |                   | - `NodeJS.TypedArray`                                                   |
+| Parameter | Type              | Description                                 |
+|-----------|-------------------|---------------------------------------------|
+| `input`   | `ToDataViewInput` | The data to be converted into a `DataView`. |
 
 </details>
 
@@ -504,11 +495,12 @@ Coerces input data into a `Uint8Array`.
 type CoerceToUint8ArrayInput = (
   | string
   | number
+  | bigint
   | Array<number>
-  | DataView
   | Buffer
-  | ArrayBuffer
-  | NodeJS.TypedArray
+  | ArrayBufferLike
+  | ArrayBufferView
+  | NodeJS.ArrayBufferView
 )
 ```
 
@@ -516,16 +508,17 @@ type CoerceToUint8ArrayInput = (
 
 <summary>Parameters</summary>
 
-| Parameter | Type              | Description                                                             |
-|-----------|-------------------|-------------------------------------------------------------------------|
-| `input`   | `CoerceToUint8ArrayInput` | The input data to convert. Possible input Type can be:          |
-|           |                   | - `string`                                                              |
-|           |                   | - `number` (will be automatically converted to string)                  |
-|           |                   | - `Array<number>` (array of bytes)                                      |
-|           |                   | - `DataView`                                                            |
-|           |                   | - `Buffer`                                                              |
-|           |                   | - `ArrayBuffer`                                                         |
-|           |                   | - `NodeJS.TypedArray`                                                   |
+| Parameter | Type              | Description                                                    |
+|-----------|-------------------|----------------------------------------------------------------|
+| `input`   | `CoerceToUint8ArrayInput` | The input data to convert. Possible input Type can be: |
+|           |                   | - `string`                                                     |
+|           |                   | - `number` (will be automatically converted to string)         |
+|           |                   | - `bigint` (will be automatically converted to string)         |
+|           |                   | - `Array<number>` (array of bytes)                             |
+|           |                   | - `Buffer`                                                     |
+|           |                   | - `ArrayBufferLike`                                            |
+|           |                   | - `ArrayBufferView`                                            |
+|           |                   | - `NodeJS.ArrayBufferView`                                     |
 
 </details>
 
@@ -570,6 +563,146 @@ const view = toDataView( stringToBinary( 'Hello, World!' ) )
 
 console.log( coerceToUint8Array( view ) )
 ```
+
+</details>
+
+---
+
+##### `coerceToInt16Array`
+
+Coerces input data into a `Int16Array`.
+
+<details>
+
+<summary>Parameters</summary>
+
+| Parameter | Type              | Description |
+|-----------|-------------------|-------------|
+| `input`   | `CoerceToUint8ArrayInput` | The input data to convert. See [`CoerceToUint8ArrayInput`](#input-type-1) for accepted data types. |
+
+</details>
+
+---
+
+<details>
+
+<summary>Returns</summary>
+
+Type: `Int16Array`
+
+The function returns a new `Int16Array` instance created from the input data.
+
+</details>
+
+---
+
+##### `coerceToUint16Array`
+
+Coerces input data into a `Uint16Array`.
+
+<details>
+
+<summary>Parameters</summary>
+
+| Parameter | Type              | Description |
+|-----------|-------------------|-------------|
+| `input`   | `CoerceToUint8ArrayInput` | The input data to convert. See [`CoerceToUint8ArrayInput`](#input-type-1) for accepted data types. |
+
+</details>
+
+---
+
+<details>
+
+<summary>Returns</summary>
+
+Type: `Uint16Array`
+
+The function returns a new `Uint16Array` instance created from the input data.
+
+</details>
+
+---
+
+##### `coerceToInt32Array`
+
+Coerces input data into a `Int32Array`.
+
+<details>
+
+<summary>Parameters</summary>
+
+| Parameter | Type              | Description |
+|-----------|-------------------|-------------|
+| `input`   | `CoerceToUint8ArrayInput` | The input data to convert. See [`CoerceToUint8ArrayInput`](#input-type-1) for accepted data types. |
+
+</details>
+
+---
+
+<details>
+
+<summary>Returns</summary>
+
+Type: `Int32Array`
+
+The function returns a new `Int32Array` instance created from the input data.
+
+</details>
+
+---
+
+##### `coerceToUint32Array`
+
+Coerces input data into a `Uint32Array`.
+
+<details>
+
+<summary>Parameters</summary>
+
+| Parameter | Type              | Description |
+|-----------|-------------------|-------------|
+| `input`   | `CoerceToUint8ArrayInput` | The input data to convert. See [`CoerceToUint8ArrayInput`](#input-type-1) for accepted data types. |
+
+</details>
+
+---
+
+<details>
+
+<summary>Returns</summary>
+
+Type: `Uint32Array`
+
+The function returns a new `Uint32Array` instance created from the input data.
+
+</details>
+
+---
+
+##### `coerceToSharedArrayBuffer`
+
+Coerces input data into a `SharedArrayBuffer`.
+
+<details>
+
+<summary>Parameters</summary>
+
+| Parameter | Type              | Description |
+|-----------|-------------------|-------------|
+| `input`   | `CoerceToUint8ArrayInput` | The input data to convert. See [`CoerceToUint8ArrayInput`](#input-type-1) for accepted data types. |
+
+</details>
+
+---
+
+<details>
+
+<summary>Returns</summary>
+
+Type: `SharedArrayBuffer`
+
+The function returns a new `SharedArrayBuffer` instance created from the input data.
 
 </details>
 

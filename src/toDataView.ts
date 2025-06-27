@@ -1,12 +1,12 @@
 import { stringToBytes } from './conversion'
+import type { CoerceToUint8ArrayInput } from './coercion'
 
-export type ToDataViewInput = (
-	| string
-	| Array<number>
-	| Buffer
-	| ArrayBuffer
-	| NodeJS.TypedArray
-)
+
+/**
+ * Accepted input Types for DataView coercion.
+ * 
+ */
+export type ToDataViewInput = CoerceToUint8ArrayInput
 
 
 /**
@@ -17,46 +17,42 @@ export type ToDataViewInput = (
  */
 export const toDataView = ( input: ToDataViewInput ): DataView => {
 
-	if ( typeof input === 'string' ) {
-		return toDataView( stringToBytes( input ) )
+
+	if ( input instanceof DataView ) return input
+
+
+	if (
+		typeof input === 'string' ||
+		typeof input === 'number' ||
+		typeof input === 'bigint'
+	) {
+		return toDataView( stringToBytes( input.toString() ) )
 	}
 
-	if ( Array.isArray( input ) ) {
-		return toDataView( new Uint8Array( input ) )
-	}
 
 	if ( input instanceof ArrayBuffer ) {
 		return new DataView( input )
 	}
 
+
 	if (
-		input instanceof Int8Array ||
-		input instanceof Int16Array ||
-		input instanceof Int32Array ||
-		input instanceof Uint8Array ||
-		input instanceof Uint16Array ||
-		input instanceof Uint32Array ||
-		input instanceof Uint8ClampedArray ||
-		input instanceof BigInt64Array ||
-		input instanceof BigUint64Array ||
-		input instanceof Float32Array ||
-		input instanceof Float64Array ||
-		( typeof Buffer !== 'undefined' && ( input as Buffer ) instanceof Buffer )
+		ArrayBuffer.isView( input ) ||
+		( typeof Buffer !== 'undefined' && Buffer.isBuffer( input ) )
 	) {
-		return new DataView( input.buffer, input.byteOffset, input.byteLength )
+		return (
+			new DataView(
+				input.buffer,
+				input.byteOffset,
+				input.byteLength,
+			)
+		)
 	}
 
-	const expectedInputs = [
-		'string', 'Array<number>', 'Buffer', 'ArrayBuffer',
-		'Int8Array', 'Int16Array', 'Int32Array',
-		'Uint8Array', 'Uint16Array', 'Uint32Array',
-		'Uint8ClampedArray', 'BigInt64Array', 'BigUint64Array',
-		'Float32Array', 'Float64Array'
-	]
 
-	throw new TypeError(
-		'Expected `input` to be one of the following supported type.',
-		{ cause: expectedInputs }
-	)
+	if ( Array.isArray( input ) ) {
+		return toDataView( new Uint8Array( input ) )
+	}
+
+	return new DataView( input )
 
 }

@@ -7,11 +7,12 @@ import { stringToBytes } from '@/conversion'
 export type CoerceToUint8ArrayInput = (
 	| string
 	| number
+	| bigint
 	| Array<number>
-	| DataView
 	| Buffer
-	| ArrayBuffer
-	| NodeJS.TypedArray
+	| ArrayBufferLike
+	| ArrayBufferView
+	| NodeJS.ArrayBufferView
 )
 
 
@@ -24,30 +25,126 @@ export type CoerceToUint8ArrayInput = (
 export const coerceToUint8Array = ( input: CoerceToUint8ArrayInput ): Uint8Array => {
 
 
-	if ( typeof input === 'number' ) {
-		input = input.toString()
+	if (
+		typeof input === 'string' ||
+		typeof input === 'number' ||
+		typeof input === 'bigint'
+	) {
+		return new Uint8Array( stringToBytes( input.toString() ) )
 	}
 	
-	if ( typeof input === 'string' ) {
-		input = stringToBytes( input )
-	}
 
-	if ( input instanceof DataView ) {		
+	if (
+		input instanceof DataView ||
+		ArrayBuffer.isView( input ) ||
+		( typeof Buffer !== 'undefined' && Buffer.isBuffer( input ) )
+	) {
 		return (
-			new Uint8Array( input.buffer )
-				.subarray( input.byteOffset, input.byteOffset + input.byteLength )
+			new Uint8Array(
+				input.buffer,
+				input.byteOffset,
+				input.byteLength,
+			)
 		)
 	}
 
-
-	if (
-		input instanceof BigInt64Array ||
-		input instanceof BigUint64Array
-	) {
-		return new Uint8Array( input.buffer )
+	
+	if ( Array.isArray( input ) || input instanceof ArrayBuffer ) {
+		return new Uint8Array( input )
 	}
 
 	return new Uint8Array( input )
+}
+
+
+/**
+ * Coerce data to Int16Array.
+ * 
+ * @param	input The input data to convert.
+ * @returns	A new instance of Int16Array.
+ */
+export const coerceToInt16Array = ( input: CoerceToUint8ArrayInput ) => {
+	const buffer = coerceToUint8Array( input )
+	return (
+		new Int16Array(
+			buffer.buffer,
+			buffer.byteOffset,
+			buffer.byteLength / 2,
+		)
+	)
+}
+
+
+/**
+ * Coerce data to Uint16Array.
+ * 
+ * @param	input The input data to convert.
+ * @returns	A new instance of Uint16Array.
+ */
+export const coerceToUint16Array = ( input: CoerceToUint8ArrayInput ) => {
+	const buffer = coerceToUint8Array( input )
+	return (
+		new Uint16Array(
+			buffer.buffer,
+			buffer.byteOffset,
+			buffer.byteLength / 2,
+		)
+	)
+}
+
+
+/**
+ * Coerce data to Int32Array.
+ * 
+ * @param	input The input data to convert.
+ * @returns	A new instance of Int32Array.
+ */
+export const coerceToInt32Array = ( input: CoerceToUint8ArrayInput ) => {
+	const buffer = coerceToUint8Array( input )
+	return (
+		new Int32Array(
+			buffer.buffer,
+			buffer.byteOffset,
+			buffer.byteLength / 4,
+		)
+	)
+}
+
+
+/**
+ * Coerce data to Uint32Array.
+ * 
+ * @param	input The input data to convert.
+ * @returns	A new instance of Uint32Array.
+ */
+export const coerceToUint32Array = ( input: CoerceToUint8ArrayInput ) => {
+	const buffer = coerceToUint8Array( input )
+	return (
+		new Uint32Array(
+			buffer.buffer,
+			buffer.byteOffset,
+			buffer.byteLength / 4,
+		)
+	)
+}
+
+
+/**
+ * Coerce data to a SharedArrayBuffer.
+ * 
+ * @param	input The input data to convert.
+ * @returns	A new instance of SharedArrayBuffer.
+ */
+export const coerceToSharedArrayBuffer = ( input: CoerceToUint8ArrayInput ) => {
+
+	const bytes		= coerceToUint8Array( input )
+	const buffer	= new SharedArrayBuffer( bytes.length )
+	const view		= new Uint8Array( buffer )
+	
+	view.set( bytes )
+
+	return buffer
+
 }
 
 
