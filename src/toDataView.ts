@@ -1,15 +1,12 @@
 import { stringToBytes } from './conversion'
+import type { CoerceToUint8ArrayInput } from './coercion'
 
-export type ToDataViewInput = (
-	| string
-	| number
-	| bigint
-	| Array<number>
-	| Buffer
-	| ArrayBufferLike
-	| ArrayBufferView
-	| NodeJS.ArrayBufferView
-)
+
+/**
+ * Accepted input Types for DataView coercion.
+ * 
+ */
+export type ToDataViewInput = CoerceToUint8ArrayInput
 
 
 /**
