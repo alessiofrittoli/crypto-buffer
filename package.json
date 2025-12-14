@@ -1,6 +1,6 @@
 {
 	"name": "@alessiofrittoli/crypto-buffer",
-	"version": "3.8.0",
+	"version": "3.9.0",
 	"description": "Lightweight TypeScript Node.js Buffers utility library",
 	"author": {
 		"name": "Alessio Frittoli",
@@ -117,15 +117,15 @@
 		"test:todataview": "pnpm test todataview.test.ts"
 	},
 	"devDependencies": {
-		"@alessiofrittoli/node-scripts": "^3.2.0",
-		"@eslint/js": "^9.39.1",
+		"@alessiofrittoli/node-scripts": "^3.3.0",
+		"@eslint/js": "^9.39.2",
 		"@jest/globals": "^30.2.0",
 		"@types/jest": "^30.0.0",
-		"@types/node": "^24.10.1",
+		"@types/node": "^25.0.2",
 		"concurrently": "^9.2.1",
 		"cross-env": "^10.1.0",
 		"dotenv": "^17.2.3",
-		"eslint": "^9.39.1",
+		"eslint": "^9.39.2",
 		"globals": "^16.5.0",
 		"http-server": "^14.1.1",
 		"jest": "^30.2.0",
@@ -134,6 +134,6 @@
 		"ts-node": "^10.9.2",
 		"tsup": "^8.5.1",
 		"typescript": "^5.9.3",
-		"typescript-eslint": "^8.48.1"
+		"typescript-eslint": "^8.49.0"
 	}
 }
