@@ -1,5 +1,15 @@
 import { coerceToInt16Array, coerceToInt32Array, coerceToUint16Array, coerceToUint32Array } from '@/coercion'
-import { binarySequenceToUint8Array, binaryToString, unicodeToBinarySequence, stringToBinary, stringToBytes, binaryToLatin1String } from '@/conversion'
+import {
+	readUint16BE,
+	writeUint16BE,
+	stringToBytes,
+	binaryToString,
+	stringToBinary,
+	binaryToLatin1String,
+	unicodeToBinarySequence,
+	binarySequenceToUint8Array,
+} from '@/conversion'
+
 
 describe( 'stringToBinary', () => {
 
@@ -202,4 +212,65 @@ describe( 'binarySequenceToUint8Array', () => {
 
 	} )
 
+} )
+
+
+describe( 'writeUint16BE', () => {
+
+	it( 'writes a 16-bit unsigned integer to a Buffer in big-endian format', () => {
+
+		const value	= 0x1234
+		const buf	= writeUint16BE( value )
+
+		expect( buf ).toBeInstanceOf( Buffer )
+		expect( buf.length ).toBe( 2 )
+		expect( buf[ 0 ] ).toBe( 0x12 )
+		expect( buf[ 1 ] ).toBe( 0x34 )
+
+	} )
+
+
+	it( 'writes 0 correctly', () => {
+
+		const buf = writeUint16BE( 0 )
+
+		expect( buf[ 0 ] ).toBe( 0x00 )
+		expect( buf[ 1 ] ).toBe( 0x00 )
+
+	} )
+
+	it( 'writes 65535 (0xFFFF) correctly', () => {
+
+		const buf = writeUint16BE( 0xFFFF )
+
+		expect( buf[ 0 ] ).toBe( 0xFF )
+		expect( buf[ 1 ] ).toBe( 0xFF )
+		
+	} )
+
+} )
+
+
+describe( 'readUint16BE', () => {
+
+	it( 'reads a 16-bit unsigned integer from a Buffer in big-endian format', () => {
+		const buf = Buffer.from( [ 0x12, 0x34 ] )
+		expect( readUint16BE( buf ) ).toBe( 0x1234 )
+	} )
+
+	it( 'reads with offset', () => {
+		const buf = Buffer.from( [ 0x00, 0x12, 0x34 ] )
+		expect( readUint16BE( buf, 1 ) ).toBe( 0x1234 )
+	} )
+
+	it( 'reads 0 correctly', () => {
+		const buf = Buffer.from( [ 0x00, 0x00 ] )
+		expect( readUint16BE( buf ) ).toBe( 0 )
+	} )
+
+	it( 'reads 65535 (0xFFFF) correctly', () => {
+		const buf = Buffer.from( [ 0xFF, 0xFF ] )
+		expect( readUint16BE( buf ) ).toBe( 0xFFFF )
+	} )
+	
 } )

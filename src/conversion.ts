@@ -83,3 +83,29 @@ export const binaryToLatin1String = ( input: CoerceToUint8ArrayInput ) => {
 
 	return binary
 }
+
+
+/**
+ * Writes a 16-bit unsigned integer to a new Buffer in big-endian format.
+ *
+ * @param value The 16-bit unsigned integer to write to the buffer.
+ * @returns A Buffer containing the big-endian representation of the input value.
+ */
+export const writeUint16BE = ( value: number ) => {
+	const buf = Buffer.allocUnsafe( 2 )
+	buf.writeUInt16BE( value, 0 )
+	return buf
+}
+
+
+/**
+ * Reads an unsigned 16-bit integer from the given buffer at the specified offset using big-endian byte order.
+ *
+ * @param buffer	The buffer to read from.
+ * @param offset	(Optional) The offset in the buffer to start reading from. Default: `0`.
+ * 
+ * @returns The unsigned 16-bit integer read from the buffer.
+ */
+export const readUint16BE = ( buffer: Buffer, offset = 0 ) => (
+	buffer.readUInt16BE( offset )
+)
