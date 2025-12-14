@@ -13,7 +13,6 @@
 [downloads-badge]: https://img.shields.io/npm/dm/%40alessiofrittoli%2Fcrypto-buffer.svg
 [deps-badge]: https://img.shields.io/librariesio/release/npm/%40alessiofrittoli%2Fcrypto-buffer
 [deps-url]: https://libraries.io/npm/%40alessiofrittoli%2Fcrypto-buffer
-
 [sponsor-badge]: https://img.shields.io/static/v1?label=Fund%20this%20package&message=%E2%9D%A4&logo=GitHub&color=%23DB61A2
 [sponsor-url]: https://github.com/sponsors/alessiofrittoli
 
@@ -32,6 +31,8 @@
     - [`binaryToString`](#binarytostring)
     - [`unicodeToBinarySequence`](#unicodetobinarysequence)
     - [`binarySequenceToUint8Array`](#binarysequencetouint8array)
+    - [`writeUint16BE`](#writeuint16be)
+    - [`readUint16BE`](#readuint16be)
   - [Coercion Utilities](#coercion-utilities)
     - [`coerceToUint8Array`](#coercetouint8array)
     - [`coerceToFloatArray`](#coercetofloatarray)
@@ -76,7 +77,7 @@ The `toDataView` function is a utility designed to convert various data types in
 ##### Input Type
 
 ```ts
-type ToDataViewInput = CoerceToUint8ArrayInput
+type ToDataViewInput = CoerceToUint8ArrayInput;
 ```
 
 - See [`CoerceToUint8ArrayInput`](#input-type-1)
@@ -86,7 +87,7 @@ type ToDataViewInput = CoerceToUint8ArrayInput
 <summary>Parameters</summary>
 
 | Parameter | Type              | Description                                 |
-|-----------|-------------------|---------------------------------------------|
+| --------- | ----------------- | ------------------------------------------- |
 | `input`   | `ToDataViewInput` | The data to be converted into a `DataView`. |
 
 </details>
@@ -122,41 +123,41 @@ Throws a `TypeError` if the input does not match any of the supported types.
 ##### Converting a String to DataView
 
 ```ts
-import { toDataView } from '@alessiofrittoli/crypto-buffer'
+import { toDataView } from "@alessiofrittoli/crypto-buffer";
 // or
-import { toDataView } from '@alessiofrittoli/crypto-buffer/toDataView'
+import { toDataView } from "@alessiofrittoli/crypto-buffer/toDataView";
 
-const data = 'Hello, World!'
-const view = toDataView( data )
+const data = "Hello, World!";
+const view = toDataView(data);
 
-console.log( view.byteLength ) // Logs the byte length of the string.
+console.log(view.byteLength); // Logs the byte length of the string.
 ```
 
 ##### Converting a Uint8Array to DataView
 
 ```ts
-import { toDataView } from '@alessiofrittoli/crypto-buffer'
+import { toDataView } from "@alessiofrittoli/crypto-buffer";
 // or
-import { toDataView } from '@alessiofrittoli/crypto-buffer/toDataView'
+import { toDataView } from "@alessiofrittoli/crypto-buffer/toDataView";
 
-const data = new Uint8Array( [ 1, 2, 3, 4 ] )
-const view = toDataView( data )
+const data = new Uint8Array([1, 2, 3, 4]);
+const view = toDataView(data);
 
-console.log( view.getUint8( 0 ) ) // Logs 1
+console.log(view.getUint8(0)); // Logs 1
 ```
 
 ##### Handling Invalid Input
 
 ```ts
-import { toDataView } from '@alessiofrittoli/crypto-buffer'
+import { toDataView } from "@alessiofrittoli/crypto-buffer";
 // or
-import { toDataView } from '@alessiofrittoli/crypto-buffer/toDataView'
+import { toDataView } from "@alessiofrittoli/crypto-buffer/toDataView";
 
 try {
-  const invalidInput = { foo: 'bar' }
-  const view = toDataView( invalidInput )
-} catch ( error ) {
-  console.error( error.message ) // Expected `input` to be a Expected `input` to be a string, Array<number>, ...
+  const invalidInput = { foo: "bar" };
+  const view = toDataView(invalidInput);
+} catch (error) {
+  console.error(error.message); // Expected `input` to be a Expected `input` to be a string, Array<number>, ...
 }
 ```
 
@@ -177,7 +178,7 @@ It first checks the byte lengths of the two buffers to ensure they are identical
 <summary>Parameters</summary>
 
 | Parameter | Type                      | Description                                 |
-|-----------|---------------------------|---------------------------------------------|
+| --------- | ------------------------- | ------------------------------------------- |
 | `buffer1` | `CoerceToUint8ArrayInput` | The first input to compare.                 |
 | `buffer2` | `CoerceToUint8ArrayInput` | The second input to compare with `buffer1`. |
 
@@ -204,16 +205,16 @@ Type: `boolean`
 ###### Convert a String in a Node.js Environment
 
 ```ts
-import { bufferEquals } from '@alessiofrittoli/crypto-buffer'
+import { bufferEquals } from "@alessiofrittoli/crypto-buffer";
 // or
-import { bufferEquals } from '@alessiofrittoli/crypto-buffer/common'
+import { bufferEquals } from "@alessiofrittoli/crypto-buffer/common";
 
-const buffer1 = new Uint8Array( [ 1, 2, 3 ] )
-const buffer2 = new Uint8Array( [ 1, 2, 3 ] )
-const buffer3 = new Uint8Array( [ 4, 5, 6 ] )
+const buffer1 = new Uint8Array([1, 2, 3]);
+const buffer2 = new Uint8Array([1, 2, 3]);
+const buffer3 = new Uint8Array([4, 5, 6]);
 
-console.log( bufferEquals( buffer1, buffer2 ) ) // true
-console.log( bufferEquals( buffer1, buffer3 ) ) // false
+console.log(bufferEquals(buffer1, buffer2)); // true
+console.log(bufferEquals(buffer1, buffer3)); // false
 ```
 
 </details>
@@ -231,7 +232,7 @@ The `stringToBinary` function is a utility for converting a string into a `Uint8
 <summary>Parameters</summary>
 
 | Parameter | Type     | Description                 |
-|-----------|----------|-----------------------------|
+| --------- | -------- | --------------------------- |
 | `input`   | `string` | The string to be converted. |
 
 </details>
@@ -257,14 +258,14 @@ The function returns a new `Uint8Array` instance.
 ###### Convert a String to binary data
 
 ```ts
-import { stringToBinary } from '@alessiofrittoli/crypto-buffer'
+import { stringToBinary } from "@alessiofrittoli/crypto-buffer";
 // or
-import { stringToBinary } from '@alessiofrittoli/crypto-buffer/conversion'
+import { stringToBinary } from "@alessiofrittoli/crypto-buffer/conversion";
 
-const data = 'Hello, World!'
-const binary = stringToBinary( data )
+const data = "Hello, World!";
+const binary = stringToBinary(data);
 
-console.log( new TextDecoder().decode( binary ) )
+console.log(new TextDecoder().decode(binary));
 // Outputs: 'Hello, World!'
 ```
 
@@ -281,7 +282,7 @@ The `stringToBytes` function converts a string into an Array of bytes (`number[]
 <summary>Parameters</summary>
 
 | Parameter | Type     | Description                 |
-|-----------|----------|-----------------------------|
+| --------- | -------- | --------------------------- |
 | `input`   | `string` | The string to be converted. |
 
 </details>
@@ -307,15 +308,14 @@ The function returns an array of bytes (`number[]`), where each element represen
 ###### Convert a String to Bytes
 
 ```ts
-import { stringToBytes } from '@alessiofrittoli/crypto-buffer'
+import { stringToBytes } from "@alessiofrittoli/crypto-buffer";
 // or
-import { stringToBytes } from '@alessiofrittoli/crypto-buffer/conversion'
+import { stringToBytes } from "@alessiofrittoli/crypto-buffer/conversion";
 
-const data = 'Hello'
-const bytes = stringToBytes( data )
+const data = "Hello";
+const bytes = stringToBytes(data);
 
-console.log( bytes ) // [ 72, 101, 108, 108, 111 ] (ASCII values of 'Hello')
-
+console.log(bytes); // [ 72, 101, 108, 108, 111 ] (ASCII values of 'Hello')
 ```
 
 </details>
@@ -331,8 +331,8 @@ It is designed to be cross-platform, working in both Node.js and browser environ
 
 <summary>Parameters</summary>
 
-| Parameter | Type                      | Description |
-|-----------|---------------------------|-------------|
+| Parameter | Type                      | Description                                                                                                                         |
+| --------- | ------------------------- | ----------------------------------------------------------------------------------------------------------------------------------- |
 | `input`   | `CoerceToUint8ArrayInput` | The binary data to be converted to a string. See [coerceToUint8Array](#coercetouint8array) for a list of possible input data types. |
 
 </details>
@@ -358,23 +358,26 @@ A string representation of the given input.
 ###### Node.js
 
 ```ts
-import { binaryToString } from '@alessiofrittoli/crypto-buffer'
+import { binaryToString } from "@alessiofrittoli/crypto-buffer";
 // or
-import { binaryToString } from '@alessiofrittoli/crypto-buffer/conversion'
+import { binaryToString } from "@alessiofrittoli/crypto-buffer/conversion";
 
-console.log( binaryToString( Buffer.from( 'Hello, World!' ) ) )
+console.log(binaryToString(Buffer.from("Hello, World!")));
 // Outputs: 'Hello, World!'
 ```
 
 ###### Browser
 
 ```ts
-import { binaryToString, stringToBytes } from '@alessiofrittoli/crypto-buffer'
+import { binaryToString, stringToBytes } from "@alessiofrittoli/crypto-buffer";
 // or
-import { binaryToString, stringToBytes } from '@alessiofrittoli/crypto-buffer/conversion'
+import {
+  binaryToString,
+  stringToBytes,
+} from "@alessiofrittoli/crypto-buffer/conversion";
 
-const uint8Array = new Uint8Array( stringToBytes( 'Hello!' ) )
-console.log( binaryToString( uint8Array ) )
+const uint8Array = new Uint8Array(stringToBytes("Hello!"));
+console.log(binaryToString(uint8Array));
 // Outputs: 'Hello!'
 ```
 
@@ -390,8 +393,8 @@ The `unicodeToBinarySequence` function converts unicode characters to a 0-1 bina
 
 <summary>Parameters</summary>
 
-| Parameter | Type                      | Description |
-|-----------|---------------------------|-------------|
+| Parameter | Type                      | Description                                                                                                 |
+| --------- | ------------------------- | ----------------------------------------------------------------------------------------------------------- |
 | `input`   | `CoerceToUint8ArrayInput` | The data to convert. See [coerceToUint8Array](#coercetouint8array) for a list of possible input data types. |
 
 </details>
@@ -415,14 +418,14 @@ The 0-1 converted binary sequence.
 <summary>Example usage</summary>
 
 ```ts
-import { unicodeToBinarySequence } from '@alessiofrittoli/crypto-buffer'
+import { unicodeToBinarySequence } from "@alessiofrittoli/crypto-buffer";
 // or
-import { unicodeToBinarySequence } from '@alessiofrittoli/crypto-buffer/conversion'
+import { unicodeToBinarySequence } from "@alessiofrittoli/crypto-buffer/conversion";
 
-console.log( unicodeToBinarySequence( 'Hello world!' ) )
+console.log(unicodeToBinarySequence("Hello world!"));
 // Outputs: '01001000 01100101 01101100 01101100 01101111 00100000 01110111 01101111 01110010 01101100 01100100 00100001'
 
-console.log( unicodeToBinarySequence( 'Hello world!', '-' ) )
+console.log(unicodeToBinarySequence("Hello world!", "-"));
 // Outputs: '01001000-01100101-01101100-01101100-01101111-00100000-01110111-01101111-01110010-01101100-01100100-00100001'
 ```
 
@@ -438,8 +441,8 @@ The `binarySequenceToUint8Array` function converts a 0-1 binary sequence to `Uin
 
 <summary>Parameters</summary>
 
-| Parameter | Type                      | Description |
-|-----------|---------------------------|-------------|
+| Parameter | Type                      | Description                                                                                                 |
+| --------- | ------------------------- | ----------------------------------------------------------------------------------------------------------- |
 | `input`   | `CoerceToUint8ArrayInput` | The data to convert. See [coerceToUint8Array](#coercetouint8array) for a list of possible input data types. |
 
 </details>
@@ -463,15 +466,119 @@ A new Uint8Array instance.
 <summary>Example usage</summary>
 
 ```ts
-import { binarySequenceToUint8Array } from '@alessiofrittoli/crypto-buffer'
+import { binarySequenceToUint8Array } from "@alessiofrittoli/crypto-buffer";
 // or
-import { binarySequenceToUint8Array } from '@alessiofrittoli/crypto-buffer/conversion'
+import { binarySequenceToUint8Array } from "@alessiofrittoli/crypto-buffer/conversion";
 
-console.log( binaryToString( binarySequenceToUint8Array( '01001000 01100101 01101100 01101100 01101111 00100000 01110111 01101111 01110010 01101100 01100100 00100001' ) ) )
+console.log(
+  binaryToString(
+    binarySequenceToUint8Array(
+      "01001000 01100101 01101100 01101100 01101111 00100000 01110111 01101111 01110010 01101100 01100100 00100001"
+    )
+  )
+);
 // Outputs: 'Hello world!'
 
-console.log( binaryToString( binarySequenceToUint8Array( '01001000-01100101-01101100-01101100-01101111-00100000-01110111-01101111-01110010-01101100-01100100-00100001', '-' ) ) )
+console.log(
+  binaryToString(
+    binarySequenceToUint8Array(
+      "01001000-01100101-01101100-01101100-01101111-00100000-01110111-01101111-01110010-01101100-01100100-00100001",
+      "-"
+    )
+  )
+);
 // Outputs: 'Hello world!'
+```
+
+</details>
+
+---
+
+##### writeUint16BE
+
+Writes a 16-bit unsigned integer to a new Buffer in big-endian format.
+
+<details>
+
+<summary style="cursor:pointer">Parameters</summary>
+
+| Parameter | Type     | Description                                         |
+| --------- | -------- | --------------------------------------------------- |
+| `value`   | `number` | The 16-bit unsigned integer to write to the buffer. |
+
+</details>
+
+---
+
+<details>
+
+<summary style="cursor:pointer">Returns</summary>
+
+Type: `Buffer`
+
+A Buffer containing the big-endian representation of the input value.
+
+</details>
+
+---
+
+<details>
+
+<summary style="cursor:pointer">Example usage</summary>
+
+```ts
+import { writeUint16BE } from "@alessiofrittoli/crypto-buffer";
+// or
+import { writeUint16BE } from "@alessiofrittoli/crypto-buffer/conversion";
+
+console.log(writeUint16BE(0xffff));
+// Outputs: <Buffer ff ff>
+```
+
+</details>
+
+---
+
+##### readUint16BE
+
+Reads an unsigned 16-bit integer from the given buffer at the specified offset using big-endian byte order.
+
+<details>
+
+<summary style="cursor:pointer">Parameters</summary>
+
+| Parameter | Type     | Default | Description                                                |
+| --------- | -------- | ------- | ---------------------------------------------------------- |
+| `buffer`  | `number` | -       | The buffer to read from.                                   |
+| `offset`  | `number` | `0`     | (Optional) The offset in the buffer to start reading from. |
+
+</details>
+
+---
+
+<details>
+
+<summary style="cursor:pointer">Returns</summary>
+
+Type: `number`
+
+The unsigned 16-bit integer read from the buffer.
+
+</details>
+
+---
+
+<details>
+
+<summary style="cursor:pointer">Example usage</summary>
+
+```ts
+import { readUint16BE } from "@alessiofrittoli/crypto-buffer";
+// or
+import { readUint16BE } from "@alessiofrittoli/crypto-buffer/conversion";
+
+console.log(readUint16BE(Buffer.from([0x12, 0x34])));
+// Outputs: 0x1234
 ```
 
 </details>
@@ -492,7 +599,7 @@ Coerces input data into a `Uint8Array`.
 ###### Input Type
 
 ```ts
-type CoerceToUint8ArrayInput = (
+type CoerceToUint8ArrayInput =
   | string
   | number
   | bigint
@@ -500,25 +607,24 @@ type CoerceToUint8ArrayInput = (
   | Buffer
   | ArrayBufferLike
   | ArrayBufferView
-  | NodeJS.ArrayBufferView
-)
+  | NodeJS.ArrayBufferView;
 ```
 
 <details>
 
 <summary>Parameters</summary>
 
-| Parameter | Type              | Description                                                    |
-|-----------|-------------------|----------------------------------------------------------------|
+| Parameter | Type                      | Description                                            |
+| --------- | ------------------------- | ------------------------------------------------------ |
 | `input`   | `CoerceToUint8ArrayInput` | The input data to convert. Possible input Type can be: |
-|           |                   | - `string`                                                     |
-|           |                   | - `number` (will be automatically converted to string)         |
-|           |                   | - `bigint` (will be automatically converted to string)         |
-|           |                   | - `Array<number>` (array of bytes)                             |
-|           |                   | - `Buffer`                                                     |
-|           |                   | - `ArrayBufferLike`                                            |
-|           |                   | - `ArrayBufferView`                                            |
-|           |                   | - `NodeJS.ArrayBufferView`                                     |
+|           |                           | - `string`                                             |
+|           |                           | - `number` (will be automatically converted to string) |
+|           |                           | - `bigint` (will be automatically converted to string) |
+|           |                           | - `Array<number>` (array of bytes)                     |
+|           |                           | - `Buffer`                                             |
+|           |                           | - `ArrayBufferLike`                                    |
+|           |                           | - `ArrayBufferView`                                    |
+|           |                           | - `NodeJS.ArrayBufferView`                             |
 
 </details>
 
@@ -543,25 +649,25 @@ The function returns a new `Uint8Array` instance created from the input data.
 ###### Converting a String to Uint8Array
 
 ```ts
-import { coerceToUint8Array } from '@alessiofrittoli/crypto-buffer'
+import { coerceToUint8Array } from "@alessiofrittoli/crypto-buffer";
 // or
-import { coerceToUint8Array } from '@alessiofrittoli/crypto-buffer/coercion'
+import { coerceToUint8Array } from "@alessiofrittoli/crypto-buffer/coercion";
 
-const buffer = coerceToUint8Array( 'Hello, World!' )
+const buffer = coerceToUint8Array("Hello, World!");
 ```
 
 ###### Converting a DataView to Uint8Array
 
 ```ts
-import { coerceToUint8Array } from '@alessiofrittoli/crypto-buffer'
+import { coerceToUint8Array } from "@alessiofrittoli/crypto-buffer";
 // or
-import { coerceToUint8Array } from '@alessiofrittoli/crypto-buffer/coercion'
-import { toDataView } from '@alessiofrittoli/crypto-buffer/toDataView'
-import { stringToBinary } from '@alessiofrittoli/crypto-buffer/conversion'
+import { coerceToUint8Array } from "@alessiofrittoli/crypto-buffer/coercion";
+import { toDataView } from "@alessiofrittoli/crypto-buffer/toDataView";
+import { stringToBinary } from "@alessiofrittoli/crypto-buffer/conversion";
 
-const view = toDataView( stringToBinary( 'Hello, World!' ) )
+const view = toDataView(stringToBinary("Hello, World!"));
 
-console.log( coerceToUint8Array( view ) )
+console.log(coerceToUint8Array(view));
 ```
 
 </details>
@@ -576,8 +682,8 @@ Coerces input data into a `Int16Array`.
 
 <summary>Parameters</summary>
 
-| Parameter | Type              | Description |
-|-----------|-------------------|-------------|
+| Parameter | Type                      | Description                                                                                        |
+| --------- | ------------------------- | -------------------------------------------------------------------------------------------------- |
 | `input`   | `CoerceToUint8ArrayInput` | The input data to convert. See [`CoerceToUint8ArrayInput`](#input-type-1) for accepted data types. |
 
 </details>
@@ -604,8 +710,8 @@ Coerces input data into a `Uint16Array`.
 
 <summary>Parameters</summary>
 
-| Parameter | Type              | Description |
-|-----------|-------------------|-------------|
+| Parameter | Type                      | Description                                                                                        |
+| --------- | ------------------------- | -------------------------------------------------------------------------------------------------- |
 | `input`   | `CoerceToUint8ArrayInput` | The input data to convert. See [`CoerceToUint8ArrayInput`](#input-type-1) for accepted data types. |
 
 </details>
@@ -632,8 +738,8 @@ Coerces input data into a `Int32Array`.
 
 <summary>Parameters</summary>
 
-| Parameter | Type              | Description |
-|-----------|-------------------|-------------|
+| Parameter | Type                      | Description                                                                                        |
+| --------- | ------------------------- | -------------------------------------------------------------------------------------------------- |
 | `input`   | `CoerceToUint8ArrayInput` | The input data to convert. See [`CoerceToUint8ArrayInput`](#input-type-1) for accepted data types. |
 
 </details>
@@ -660,8 +766,8 @@ Coerces input data into a `Uint32Array`.
 
 <summary>Parameters</summary>
 
-| Parameter | Type              | Description |
-|-----------|-------------------|-------------|
+| Parameter | Type                      | Description                                                                                        |
+| --------- | ------------------------- | -------------------------------------------------------------------------------------------------- |
 | `input`   | `CoerceToUint8ArrayInput` | The input data to convert. See [`CoerceToUint8ArrayInput`](#input-type-1) for accepted data types. |
 
 </details>
@@ -688,8 +794,8 @@ Coerces input data into a `SharedArrayBuffer`.
 
 <summary>Parameters</summary>
 
-| Parameter | Type              | Description |
-|-----------|-------------------|-------------|
+| Parameter | Type                      | Description                                                                                        |
+| --------- | ------------------------- | -------------------------------------------------------------------------------------------------- |
 | `input`   | `CoerceToUint8ArrayInput` | The input data to convert. See [`CoerceToUint8ArrayInput`](#input-type-1) for accepted data types. |
 
 </details>
@@ -716,10 +822,10 @@ Coerces input data into a `Float32Array` or `Float64Array`, based on the specifi
 
 <summary>Parameters</summary>
 
-| Parameter | Type       | Description |
-|-----------|------------|-------------|
+| Parameter | Type                      | Description                                                                                                       |
+| --------- | ------------------------- | ----------------------------------------------------------------------------------------------------------------- |
 | `input`   | `CoerceToUint8ArrayInput` | The input data to convert. See [coerceToUint8Array](#coercetouint8array) for a list of possible input data types. |
-| `bit`     | `32 \| 64` | Specifies whether to return a `Float32Array` (32-bit) or `Float64Array` (64-bit). |
+| `bit`     | `32 \| 64`                | Specifies whether to return a `Float32Array` (32-bit) or `Float64Array` (64-bit).                                 |
 
 </details>
 
@@ -745,8 +851,8 @@ A specialized version of `coerceToFloatArray` that coerces input data into a `Fl
 
 <summary>Parameters</summary>
 
-| Parameter | Type       | Description |
-|-----------|------------|-------------|
+| Parameter | Type                      | Description                                                                                                       |
+| --------- | ------------------------- | ----------------------------------------------------------------------------------------------------------------- |
 | `input`   | `CoerceToUint8ArrayInput` | The input data to convert. See [coerceToUint8Array](#coercetouint8array) for a list of possible input data types. |
 
 </details>
@@ -770,11 +876,11 @@ A new instance of `Float32Array`.
 <summary>Usage</summary>
 
 ```ts
-import { coerceToFloat32Array } from '@alessiofrittoli/crypto-buffer'
+import { coerceToFloat32Array } from "@alessiofrittoli/crypto-buffer";
 // or
-import { coerceToFloat32Array } from '@alessiofrittoli/crypto-buffer/coercion'
+import { coerceToFloat32Array } from "@alessiofrittoli/crypto-buffer/coercion";
 
-const float32Array = coerceToFloat32Array( 'Hello, World!' )
+const float32Array = coerceToFloat32Array("Hello, World!");
 ```
 
 </details>
@@ -789,8 +895,8 @@ A specialized version of `coerceToFloatArray` that coerces input data into a `Fl
 
 <summary>Parameters</summary>
 
-| Parameter | Type       | Description |
-|-----------|------------|-------------|
+| Parameter | Type                      | Description                                                                                                       |
+| --------- | ------------------------- | ----------------------------------------------------------------------------------------------------------------- |
 | `input`   | `CoerceToUint8ArrayInput` | The input data to convert. See [coerceToUint8Array](#coercetouint8array) for a list of possible input data types. |
 
 </details>
@@ -814,11 +920,11 @@ A new instance of `Float64Array`.
 <summary>Usage</summary>
 
 ```ts
-import { coerceToFloat64Array } from '@alessiofrittoli/crypto-buffer'
+import { coerceToFloat64Array } from "@alessiofrittoli/crypto-buffer";
 // or
-import { coerceToFloat64Array } from '@alessiofrittoli/crypto-buffer/coercion'
+import { coerceToFloat64Array } from "@alessiofrittoli/crypto-buffer/coercion";
 
-const float64Array = coerceToFloat64Array( 'Hello, World!' )
+const float64Array = coerceToFloat64Array("Hello, World!");
 ```
 
 </details>
@@ -833,10 +939,10 @@ Coerces input data into a `BigInt64Array` or `BigUint64Array` based on the `isUn
 
 <summary>Parameters</summary>
 
-| Parameter    | Type       | Description |
-|--------------|------------|-------------|
+| Parameter    | Type                      | Description                                                                                                       |
+| ------------ | ------------------------- | ----------------------------------------------------------------------------------------------------------------- |
 | `input`      | `CoerceToUint8ArrayInput` | The input data to convert. See [coerceToUint8Array](#coercetouint8array) for a list of possible input data types. |
-| `isUnsigned` | `boolean`  | If `true`, returns a `BigUint64Array`, `BigInt64Array` otherwise. |
+| `isUnsigned` | `boolean`                 | If `true`, returns a `BigUint64Array`, `BigInt64Array` otherwise.                                                 |
 
 </details>
 
@@ -862,8 +968,8 @@ A specialized version of `coerceToFloatArray` that coerces input data into a `Bi
 
 <summary>Parameters</summary>
 
-| Parameter | Type       | Description |
-|-----------|------------|-------------|
+| Parameter | Type                      | Description                                                                                                       |
+| --------- | ------------------------- | ----------------------------------------------------------------------------------------------------------------- |
 | `input`   | `CoerceToUint8ArrayInput` | The input data to convert. See [coerceToUint8Array](#coercetouint8array) for a list of possible input data types. |
 
 </details>
@@ -887,11 +993,11 @@ A new instance of `BigInt64Array`.
 <summary>Usage</summary>
 
 ```ts
-import { coerceToBigInt64Array } from '@alessiofrittoli/crypto-buffer'
+import { coerceToBigInt64Array } from "@alessiofrittoli/crypto-buffer";
 // or
-import { coerceToBigInt64Array } from '@alessiofrittoli/crypto-buffer/coercion'
+import { coerceToBigInt64Array } from "@alessiofrittoli/crypto-buffer/coercion";
 
-const bigInt64Array = coerceToBigInt64Array( 'Hello, World!' )
+const bigInt64Array = coerceToBigInt64Array("Hello, World!");
 ```
 
 </details>
@@ -906,8 +1012,8 @@ A specialized version of `coerceToFloatArray` that coerces input data into a `Bi
 
 <summary>Parameters</summary>
 
-| Parameter | Type       | Description |
-|-----------|------------|-------------|
+| Parameter | Type                      | Description                                                                                                       |
+| --------- | ------------------------- | ----------------------------------------------------------------------------------------------------------------- |
 | `input`   | `CoerceToUint8ArrayInput` | The input data to convert. See [coerceToUint8Array](#coercetouint8array) for a list of possible input data types. |
 
 </details>
@@ -931,11 +1037,11 @@ A new instance of `BigUint64Array`.
 <summary>Usage</summary>
 
 ```ts
-import { coerceToBigUint64Array } from '@alessiofrittoli/crypto-buffer'
+import { coerceToBigUint64Array } from "@alessiofrittoli/crypto-buffer";
 // or
-import { coerceToBigUint64Array } from '@alessiofrittoli/crypto-buffer/coercion'
+import { coerceToBigUint64Array } from "@alessiofrittoli/crypto-buffer/coercion";
 
-const bigUint64Array = coerceToBigUint64Array( 'Hello, World!' )
+const bigUint64Array = coerceToBigUint64Array("Hello, World!");
 ```
 
 </details>
