@@ -33,6 +33,8 @@
     - [`binarySequenceToUint8Array`](#binarysequencetouint8array)
     - [`writeUint16BE`](#writeuint16be)
     - [`readUint16BE`](#readuint16be)
+    - [`writeUint32BE`](#writeuint32be)
+    - [`readUint32BE`](#readuint32be)
   - [Coercion Utilities](#coercion-utilities)
     - [`coerceToUint8Array`](#coercetouint8array)
     - [`coerceToFloatArray`](#coercetofloatarray)
@@ -579,6 +581,97 @@ import { readUint16BE } from "@alessiofrittoli/crypto-buffer/conversion";
 
 console.log(readUint16BE(Buffer.from([0x12, 0x34])));
 // Outputs: 0x1234
+```
+
+</details>
+
+---
+
+##### writeUint32BE
+
+Writes a 32-bit unsigned integer to a new Buffer in big-endian format.
+
+<details>
+
+<summary style="cursor:pointer">Parameters</summary>
+
+| Parameter | Type     | Description                                         |
+| --------- | -------- | --------------------------------------------------- |
+| `value`   | `number` | The 32-bit unsigned integer to write to the buffer. |
+
+</details>
+
+---
+
+<details>
+
+<summary style="cursor:pointer">Returns</summary>
+
+Type: `Buffer`
+
+A Buffer containing the big-endian representation of the input value.
+
+</details>
+
+---
+
+<details>
+
+<summary style="cursor:pointer">Example usage</summary>
+
+```ts
+import { writeUint32BE } from "@alessiofrittoli/crypto-buffer";
+// or
+import { writeUint32BE } from "@alessiofrittoli/crypto-buffer/conversion";
+
+console.log(writeUint32BE(0xffffffff));
+// Outputs: <Buffer ff ff ff ff>
+```
+
+</details>
+
+---
+
+##### readUint32BE
+
+Reads an unsigned 32-bit integer from the given buffer at the specified offset using big-endian byte order.
+
+<details>
+
+<summary style="cursor:pointer">Parameters</summary>
+
+| Parameter | Type     | Default | Description                                                |
+| --------- | -------- | ------- | ---------------------------------------------------------- |
+| `buffer`  | `number` | -       | The buffer to read from.                                   |
+| `offset`  | `number` | `0`     | (Optional) The offset in the buffer to start reading from. |
+
+</details>
+
+---
+
+<details>
+
+<summary style="cursor:pointer">Returns</summary>
+
+Type: `number`
+
+The unsigned 32-bit integer read from the buffer.
+
+</details>
+
+---
+
+<details>
+
+<summary style="cursor:pointer">Example usage</summary>
+
+```ts
+import { readUint32BE } from "@alessiofrittoli/crypto-buffer";
+// or
+import { readUint32BE } from "@alessiofrittoli/crypto-buffer/conversion";
+
+console.log(readUint32BE(Buffer.from([0x12, 0x34, 0x56, 0x78])));
+// Outputs: 0x12345678
 ```
 
 </details>
