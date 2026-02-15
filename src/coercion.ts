@@ -22,7 +22,7 @@ export type CoerceToUint8ArrayInput = (
  * @param	input The input data to convert.
  * @returns	A new instance of Uint8Array.
  */
-export const coerceToUint8Array = ( input: CoerceToUint8ArrayInput ): Uint8Array => {
+export const coerceToUint8Array = ( input: CoerceToUint8ArrayInput ): Uint8Array<ArrayBufferLike> => {
 
 
 	if (
@@ -63,7 +63,7 @@ export const coerceToUint8Array = ( input: CoerceToUint8ArrayInput ): Uint8Array
  * @param	input The input data to convert.
  * @returns	A new instance of Int16Array.
  */
-export const coerceToInt16Array = ( input: CoerceToUint8ArrayInput ) => {
+export const coerceToInt16Array = ( input: CoerceToUint8ArrayInput ): Int16Array<ArrayBufferLike> => {
 	const buffer = coerceToUint8Array( input )
 	return (
 		new Int16Array(
@@ -81,7 +81,7 @@ export const coerceToInt16Array = ( input: CoerceToUint8ArrayInput ) => {
  * @param	input The input data to convert.
  * @returns	A new instance of Uint16Array.
  */
-export const coerceToUint16Array = ( input: CoerceToUint8ArrayInput ) => {
+export const coerceToUint16Array = ( input: CoerceToUint8ArrayInput ): Uint16Array<ArrayBufferLike> => {
 	const buffer = coerceToUint8Array( input )
 	return (
 		new Uint16Array(
@@ -99,7 +99,7 @@ export const coerceToUint16Array = ( input: CoerceToUint8ArrayInput ) => {
  * @param	input The input data to convert.
  * @returns	A new instance of Int32Array.
  */
-export const coerceToInt32Array = ( input: CoerceToUint8ArrayInput ) => {
+export const coerceToInt32Array = ( input: CoerceToUint8ArrayInput ): Int32Array<ArrayBufferLike> => {
 	const buffer = coerceToUint8Array( input )
 	return (
 		new Int32Array(
@@ -117,7 +117,7 @@ export const coerceToInt32Array = ( input: CoerceToUint8ArrayInput ) => {
  * @param	input The input data to convert.
  * @returns	A new instance of Uint32Array.
  */
-export const coerceToUint32Array = ( input: CoerceToUint8ArrayInput ) => {
+export const coerceToUint32Array = ( input: CoerceToUint8ArrayInput ): Uint32Array<ArrayBufferLike> => {
 	const buffer = coerceToUint8Array( input )
 	return (
 		new Uint32Array(
@@ -135,7 +135,7 @@ export const coerceToUint32Array = ( input: CoerceToUint8ArrayInput ) => {
  * @param	input The input data to convert.
  * @returns	A new instance of SharedArrayBuffer.
  */
-export const coerceToSharedArrayBuffer = ( input: CoerceToUint8ArrayInput ) => {
+export const coerceToSharedArrayBuffer = ( input: CoerceToUint8ArrayInput ): SharedArrayBuffer => {
 
 	const bytes		= coerceToUint8Array( input )
 	const buffer	= new SharedArrayBuffer( bytes.length )
