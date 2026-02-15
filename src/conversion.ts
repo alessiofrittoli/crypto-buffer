@@ -7,7 +7,7 @@ import { coerceToUint8Array, type CoerceToUint8ArrayInput } from '@/coercion'
  * @param input The string to convert.
  * @returns A new Uint8Array instance.
  */
-export const stringToBinary = ( input: string ): Uint8Array => (
+export const stringToBinary = ( input: string ): Uint8Array<ArrayBuffer> => (
 	new Uint8Array( new TextEncoder().encode( input ) )
 )
 
@@ -31,7 +31,7 @@ export const unicodeToBinarySequence = ( input: CoerceToUint8ArrayInput, separat
  * @param input The 0-1 binary to convert.
  * @returns A new Uint8Array instance.
  */
-export const binarySequenceToUint8Array = ( input: CoerceToUint8ArrayInput, separator = ' ' ) => (
+export const binarySequenceToUint8Array = ( input: CoerceToUint8ArrayInput, separator = ' ' ): Uint8Array<ArrayBuffer> => (
 	new Uint8Array(
 		( separator === ''
 			? ( binaryToString( input ).match( /.{1,8}/g ) || [] )
@@ -91,7 +91,7 @@ export const binaryToLatin1String = ( input: CoerceToUint8ArrayInput ) => {
  * @param value The 16-bit unsigned integer to write to the buffer.
  * @returns A Buffer containing the big-endian representation of the input value.
  */
-export const writeUint16BE = ( value: number ) => {
+export const writeUint16BE = ( value: number ): Buffer<ArrayBuffer> => {
 	const buf = Buffer.allocUnsafe( 2 )
 	buf.writeUInt16BE( value, 0 )
 	return buf
@@ -117,7 +117,7 @@ export const readUint16BE = ( buffer: Buffer, offset = 0 ) => (
  * @param value The 32-bit unsigned integer to write to the buffer.
  * @returns A Buffer containing the big-endian representation of the input value.
  */
-export const writeUint32BE = ( value: number ) => {
+export const writeUint32BE = ( value: number ): Buffer<ArrayBuffer> => {
 	const buf = Buffer.allocUnsafe( 4 )
 	buf.writeUInt32BE( value, 0 )
 	return buf
