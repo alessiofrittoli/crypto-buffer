@@ -1,27 +1,57 @@
-# Crypto Buffer 🚌
+<h1 align="center">Crypto Buffer 🚌</h1>
+<h2 align="center">
+  Lightweight TypeScript Node.js Buffers utility library
+</h2>
+<p align="center">
+  <a href="https://npmjs.org/package/@alessiofrittoli/crypto-buffer">
+    <img src="https://img.shields.io/npm/v/@alessiofrittoli/crypto-buffer" alt="Latest version"/>
+  </a>
+  <a href="https://coveralls.io/github/alessiofrittoli/crypto-buffer">
+    <img src="https://coveralls.io/repos/github/alessiofrittoli/crypto-buffer/badge.svg" alt="Test coverage"/>
+  </a>
+  <a href="https://socket.dev/npm/package/@alessiofrittoli/crypto-buffer/overview">
+    <img src="https://socket.dev/api/badge/npm/package/@alessiofrittoli/crypto-buffer" alt="Socket Security score"/>
+  </a>
+  <a href="https://npmjs.org/package/@alessiofrittoli/crypto-buffer">
+    <img src="https://img.shields.io/npm/dm/@alessiofrittoli/crypto-buffer.svg" alt="npm downloads"/>
+  </a>
+  <a href="https://bundlephobia.com/package/@alessiofrittoli/crypto-buffer">
+    <img src="https://badgen.net/bundlephobia/dependency-count/@alessiofrittoli/crypto-buffer" alt="Dependencies"/>
+  </a>
+  <a href="https://libraries.io/npm/%40alessiofrittoli%2Fcrypto-buffer">
+    <img src="https://img.shields.io/librariesio/release/npm/@alessiofrittoli/crypto-buffer" alt="Dependencies status"/>
+  </a>
+</p>
+<p align="center">
+  <a href="https://bundlephobia.com/package/@alessiofrittoli/crypto-buffer">
+    <img src="https://badgen.net/bundlephobia/min/@alessiofrittoli/crypto-buffer" alt="minified"/>
+  </a>
+  <a href="https://bundlephobia.com/package/@alessiofrittoli/crypto-buffer">
+    <img src="https://badgen.net/bundlephobia/minzip/@alessiofrittoli/crypto-buffer" alt="minizipped"/>
+  </a>
+  <a href="https://bundlephobia.com/package/@alessiofrittoli/crypto-buffer">
+    <img src="https://badgen.net/bundlephobia/tree-shaking/@alessiofrittoli/crypto-buffer" alt="Tree shakable"/>
+  </a>
+</p>
+<p align="center">
+  <a href="https://github.com/sponsors/alessiofrittoli">
+    <img src="https://img.shields.io/static/v1?label=Fund%20this%20package&message=%E2%9D%A4&logo=GitHub&color=%23DB61A2" alt="Fund this package"/>
+  </a>
+</p>
 
-[![NPM Latest Version][version-badge]][npm-url] [![Coverage Status][coverage-badge]][coverage-url] [![Socket Status][socket-badge]][socket-url] [![NPM Monthly Downloads][downloads-badge]][npm-url] [![Dependencies][deps-badge]][deps-url]
-
-[![GitHub Sponsor][sponsor-badge]][sponsor-url]
-
-[version-badge]: https://img.shields.io/npm/v/%40alessiofrittoli%2Fcrypto-buffer
-[npm-url]: https://npmjs.org/package/%40alessiofrittoli%2Fcrypto-buffer
-[coverage-badge]: https://coveralls.io/repos/github/alessiofrittoli/crypto-buffer/badge.svg
-[coverage-url]: https://coveralls.io/github/alessiofrittoli/crypto-buffer
-[socket-badge]: https://socket.dev/api/badge/npm/package/@alessiofrittoli/crypto-buffer
-[socket-url]: https://socket.dev/npm/package/@alessiofrittoli/crypto-buffer/overview
-[downloads-badge]: https://img.shields.io/npm/dm/%40alessiofrittoli%2Fcrypto-buffer.svg
-[deps-badge]: https://img.shields.io/librariesio/release/npm/%40alessiofrittoli%2Fcrypto-buffer
-[deps-url]: https://libraries.io/npm/%40alessiofrittoli%2Fcrypto-buffer
 [sponsor-badge]: https://img.shields.io/static/v1?label=Fund%20this%20package&message=%E2%9D%A4&logo=GitHub&color=%23DB61A2
 [sponsor-url]: https://github.com/sponsors/alessiofrittoli
 
-## Lightweight TypeScript Node.js Buffers utility library
+### Table of Content
 
-### Table of Contents
-
-- [Getting started](#getting-started)
-- [Utilities](#utilities)
+- [Development](#development)
+  - [Local development](#local-development)
+  - [Production build](#production-build)
+  - [Unit tests](#unit-tests)
+    - [Run tests with coverage](#run-tests-with-coverage)
+  - [Contributing](#contributing)
+  - [Security](#security)
+- [API Reference](#api-reference)
   - [`toDataView`](#todataview)
   - [Common Utilities](#common-utilities)
     - [`bufferEquals`](#bufferequals)
@@ -43,13 +73,6 @@
     - [`coerceToBigArray`](#coercetobigarray)
     - [`coerceToBigInt64Array`](#coercetobigint64array)
     - [`coerceToBigUint64Array`](#coercetobiguint64array)
-- [Development](#development)
-  - [Install depenendencies](#install-depenendencies)
-  - [Build the source code](#build-the-source-code)
-  - [ESLint](#eslint)
-  - [Jest](#jest)
-  - [Contributing](#contributing)
-  - [Security](#security)
 - [Credits](#made-with-)
 
 ---
@@ -70,7 +93,85 @@ pnpm i @alessiofrittoli/crypto-buffer
 
 ---
 
-### Utilities
+### Development
+
+Run the following to start development
+
+```shell
+nvm use
+
+pnpm i
+```
+
+#### Local development
+
+Run the following
+
+```shell
+pnpm dev
+```
+
+This will generate unminified output code, sourcemaps and will enable source file watcher.
+
+---
+
+#### Production build
+
+Run the following to create a local production build
+
+```shell
+pnpm build
+```
+
+This will generate minified output code without sourcemaps.
+
+---
+
+#### Unit tests
+
+Run all the defined test suites by running the following:
+
+```shell
+# Run tests and watch file changes.
+pnpm test:watch
+
+# Run tests in a CI environment.
+pnpm test:ci
+```
+
+---
+
+##### Run tests with coverage
+
+An HTTP server is then started to serve coverage files from `./coverage` folder.
+
+⚠️ You may see a blank page the first time you run this command. Simply refresh the browser to see the updates.
+
+```shell
+pnpm test:coverage:serve
+```
+
+---
+
+#### Contributing
+
+Contributions are truly welcome!
+
+Please refer to the [Contributing Doc](./CONTRIBUTING.md) for more information on how to start contributing to this project.
+
+Help keep this project up to date with [GitHub Sponsor][sponsor-url].
+
+[![GitHub Sponsor][sponsor-badge]][sponsor-url]
+
+---
+
+#### Security
+
+If you believe you have found a security vulnerability, we encourage you to **_responsibly disclose this and NOT open a public issue_**. We will investigate all legitimate reports. Email `security@alessiofrittoli.it` to disclose any security vulnerabilities.
+
+---
+
+### API Reference
 
 #### `toDataView`
 
@@ -79,7 +180,7 @@ The `toDataView` function is a utility designed to convert various data types in
 ##### Input Type
 
 ```ts
-type ToDataViewInput = CoerceToUint8ArrayInput;
+type ToDataViewInput = CoerceToUint8ArrayInput
 ```
 
 - See [`CoerceToUint8ArrayInput`](#input-type-1)
@@ -125,41 +226,41 @@ Throws a `TypeError` if the input does not match any of the supported types.
 ##### Converting a String to DataView
 
 ```ts
-import { toDataView } from "@alessiofrittoli/crypto-buffer";
 // or
-import { toDataView } from "@alessiofrittoli/crypto-buffer/toDataView";
+import { toDataView } from '@alessiofrittoli/crypto-buffer/toDataView'
+import { toDataView } from '@alessiofrittoli/crypto-buffer'
 
-const data = "Hello, World!";
-const view = toDataView(data);
+const data = 'Hello, World!'
+const view = toDataView(data)
 
-console.log(view.byteLength); // Logs the byte length of the string.
+console.log(view.byteLength) // Logs the byte length of the string.
 ```
 
 ##### Converting a Uint8Array to DataView
 
 ```ts
-import { toDataView } from "@alessiofrittoli/crypto-buffer";
 // or
-import { toDataView } from "@alessiofrittoli/crypto-buffer/toDataView";
+import { toDataView } from '@alessiofrittoli/crypto-buffer/toDataView'
+import { toDataView } from '@alessiofrittoli/crypto-buffer'
 
-const data = new Uint8Array([1, 2, 3, 4]);
-const view = toDataView(data);
+const data = new Uint8Array([1, 2, 3, 4])
+const view = toDataView(data)
 
-console.log(view.getUint8(0)); // Logs 1
+console.log(view.getUint8(0)) // Logs 1
 ```
 
 ##### Handling Invalid Input
 
 ```ts
-import { toDataView } from "@alessiofrittoli/crypto-buffer";
 // or
-import { toDataView } from "@alessiofrittoli/crypto-buffer/toDataView";
+import { toDataView } from '@alessiofrittoli/crypto-buffer/toDataView'
+import { toDataView } from '@alessiofrittoli/crypto-buffer'
 
 try {
-  const invalidInput = { foo: "bar" };
-  const view = toDataView(invalidInput);
+  const invalidInput = { foo: 'bar' }
+  const view = toDataView(invalidInput)
 } catch (error) {
-  console.error(error.message); // Expected `input` to be a Expected `input` to be a string, Array<number>, ...
+  console.error(error.message) // Expected `input` to be a Expected `input` to be a string, Array<number>, ...
 }
 ```
 
@@ -207,16 +308,16 @@ Type: `boolean`
 ###### Convert a String in a Node.js Environment
 
 ```ts
-import { bufferEquals } from "@alessiofrittoli/crypto-buffer";
 // or
-import { bufferEquals } from "@alessiofrittoli/crypto-buffer/common";
+import { bufferEquals } from '@alessiofrittoli/crypto-buffer/common'
+import { bufferEquals } from '@alessiofrittoli/crypto-buffer'
 
-const buffer1 = new Uint8Array([1, 2, 3]);
-const buffer2 = new Uint8Array([1, 2, 3]);
-const buffer3 = new Uint8Array([4, 5, 6]);
+const buffer1 = new Uint8Array([1, 2, 3])
+const buffer2 = new Uint8Array([1, 2, 3])
+const buffer3 = new Uint8Array([4, 5, 6])
 
-console.log(bufferEquals(buffer1, buffer2)); // true
-console.log(bufferEquals(buffer1, buffer3)); // false
+console.log(bufferEquals(buffer1, buffer2)) // true
+console.log(bufferEquals(buffer1, buffer3)) // false
 ```
 
 </details>
@@ -260,14 +361,14 @@ The function returns a new `Uint8Array` instance.
 ###### Convert a String to binary data
 
 ```ts
-import { stringToBinary } from "@alessiofrittoli/crypto-buffer";
 // or
-import { stringToBinary } from "@alessiofrittoli/crypto-buffer/conversion";
+import { stringToBinary } from '@alessiofrittoli/crypto-buffer/conversion'
+import { stringToBinary } from '@alessiofrittoli/crypto-buffer'
 
-const data = "Hello, World!";
-const binary = stringToBinary(data);
+const data = 'Hello, World!'
+const binary = stringToBinary(data)
 
-console.log(new TextDecoder().decode(binary));
+console.log(new TextDecoder().decode(binary))
 // Outputs: 'Hello, World!'
 ```
 
@@ -310,14 +411,14 @@ The function returns an array of bytes (`number[]`), where each element represen
 ###### Convert a String to Bytes
 
 ```ts
-import { stringToBytes } from "@alessiofrittoli/crypto-buffer";
 // or
-import { stringToBytes } from "@alessiofrittoli/crypto-buffer/conversion";
+import { stringToBytes } from '@alessiofrittoli/crypto-buffer/conversion'
+import { stringToBytes } from '@alessiofrittoli/crypto-buffer'
 
-const data = "Hello";
-const bytes = stringToBytes(data);
+const data = 'Hello'
+const bytes = stringToBytes(data)
 
-console.log(bytes); // [ 72, 101, 108, 108, 111 ] (ASCII values of 'Hello')
+console.log(bytes) // [ 72, 101, 108, 108, 111 ] (ASCII values of 'Hello')
 ```
 
 </details>
@@ -360,26 +461,23 @@ A string representation of the given input.
 ###### Node.js
 
 ```ts
-import { binaryToString } from "@alessiofrittoli/crypto-buffer";
 // or
-import { binaryToString } from "@alessiofrittoli/crypto-buffer/conversion";
+import { binaryToString } from '@alessiofrittoli/crypto-buffer/conversion'
+import { binaryToString } from '@alessiofrittoli/crypto-buffer'
 
-console.log(binaryToString(Buffer.from("Hello, World!")));
+console.log(binaryToString(Buffer.from('Hello, World!')))
 // Outputs: 'Hello, World!'
 ```
 
 ###### Browser
 
 ```ts
-import { binaryToString, stringToBytes } from "@alessiofrittoli/crypto-buffer";
 // or
-import {
-  binaryToString,
-  stringToBytes,
-} from "@alessiofrittoli/crypto-buffer/conversion";
+import { binaryToString, stringToBytes } from '@alessiofrittoli/crypto-buffer/conversion'
+import { binaryToString, stringToBytes } from '@alessiofrittoli/crypto-buffer'
 
-const uint8Array = new Uint8Array(stringToBytes("Hello!"));
-console.log(binaryToString(uint8Array));
+const uint8Array = new Uint8Array(stringToBytes('Hello!'))
+console.log(binaryToString(uint8Array))
 // Outputs: 'Hello!'
 ```
 
@@ -420,14 +518,14 @@ The 0-1 converted binary sequence.
 <summary>Example usage</summary>
 
 ```ts
-import { unicodeToBinarySequence } from "@alessiofrittoli/crypto-buffer";
 // or
-import { unicodeToBinarySequence } from "@alessiofrittoli/crypto-buffer/conversion";
+import { unicodeToBinarySequence } from '@alessiofrittoli/crypto-buffer/conversion'
+import { unicodeToBinarySequence } from '@alessiofrittoli/crypto-buffer'
 
-console.log(unicodeToBinarySequence("Hello world!"));
+console.log(unicodeToBinarySequence('Hello world!'))
 // Outputs: '01001000 01100101 01101100 01101100 01101111 00100000 01110111 01101111 01110010 01101100 01100100 00100001'
 
-console.log(unicodeToBinarySequence("Hello world!", "-"));
+console.log(unicodeToBinarySequence('Hello world!', '-'))
 // Outputs: '01001000-01100101-01101100-01101100-01101111-00100000-01110111-01101111-01110010-01101100-01100100-00100001'
 ```
 
@@ -468,27 +566,27 @@ A new Uint8Array instance.
 <summary>Example usage</summary>
 
 ```ts
-import { binarySequenceToUint8Array } from "@alessiofrittoli/crypto-buffer";
 // or
-import { binarySequenceToUint8Array } from "@alessiofrittoli/crypto-buffer/conversion";
+import { binarySequenceToUint8Array } from '@alessiofrittoli/crypto-buffer/conversion'
+import { binarySequenceToUint8Array } from '@alessiofrittoli/crypto-buffer'
 
 console.log(
   binaryToString(
     binarySequenceToUint8Array(
-      "01001000 01100101 01101100 01101100 01101111 00100000 01110111 01101111 01110010 01101100 01100100 00100001"
-    )
-  )
-);
+      '01001000 01100101 01101100 01101100 01101111 00100000 01110111 01101111 01110010 01101100 01100100 00100001',
+    ),
+  ),
+)
 // Outputs: 'Hello world!'
 
 console.log(
   binaryToString(
     binarySequenceToUint8Array(
-      "01001000-01100101-01101100-01101100-01101111-00100000-01110111-01101111-01110010-01101100-01100100-00100001",
-      "-"
-    )
-  )
-);
+      '01001000-01100101-01101100-01101100-01101111-00100000-01110111-01101111-01110010-01101100-01100100-00100001',
+      '-',
+    ),
+  ),
+)
 // Outputs: 'Hello world!'
 ```
 
@@ -529,11 +627,11 @@ A Buffer containing the big-endian representation of the input value.
 <summary style="cursor:pointer">Example usage</summary>
 
 ```ts
-import { writeUint16BE } from "@alessiofrittoli/crypto-buffer";
 // or
-import { writeUint16BE } from "@alessiofrittoli/crypto-buffer/conversion";
+import { writeUint16BE } from '@alessiofrittoli/crypto-buffer/conversion'
+import { writeUint16BE } from '@alessiofrittoli/crypto-buffer'
 
-console.log(writeUint16BE(0xffff));
+console.log(writeUint16BE(0xffff))
 // Outputs: <Buffer ff ff>
 ```
 
@@ -575,11 +673,11 @@ The unsigned 16-bit integer read from the buffer.
 <summary style="cursor:pointer">Example usage</summary>
 
 ```ts
-import { readUint16BE } from "@alessiofrittoli/crypto-buffer";
 // or
-import { readUint16BE } from "@alessiofrittoli/crypto-buffer/conversion";
+import { readUint16BE } from '@alessiofrittoli/crypto-buffer/conversion'
+import { readUint16BE } from '@alessiofrittoli/crypto-buffer'
 
-console.log(readUint16BE(Buffer.from([0x12, 0x34])));
+console.log(readUint16BE(Buffer.from([0x12, 0x34])))
 // Outputs: 0x1234
 ```
 
@@ -620,11 +718,11 @@ A Buffer containing the big-endian representation of the input value.
 <summary style="cursor:pointer">Example usage</summary>
 
 ```ts
-import { writeUint32BE } from "@alessiofrittoli/crypto-buffer";
 // or
-import { writeUint32BE } from "@alessiofrittoli/crypto-buffer/conversion";
+import { writeUint32BE } from '@alessiofrittoli/crypto-buffer/conversion'
+import { writeUint32BE } from '@alessiofrittoli/crypto-buffer'
 
-console.log(writeUint32BE(0xffffffff));
+console.log(writeUint32BE(0xffffffff))
 // Outputs: <Buffer ff ff ff ff>
 ```
 
@@ -666,11 +764,11 @@ The unsigned 32-bit integer read from the buffer.
 <summary style="cursor:pointer">Example usage</summary>
 
 ```ts
-import { readUint32BE } from "@alessiofrittoli/crypto-buffer";
 // or
-import { readUint32BE } from "@alessiofrittoli/crypto-buffer/conversion";
+import { readUint32BE } from '@alessiofrittoli/crypto-buffer/conversion'
+import { readUint32BE } from '@alessiofrittoli/crypto-buffer'
 
-console.log(readUint32BE(Buffer.from([0x12, 0x34, 0x56, 0x78])));
+console.log(readUint32BE(Buffer.from([0x12, 0x34, 0x56, 0x78])))
 // Outputs: 0x12345678
 ```
 
@@ -700,7 +798,7 @@ type CoerceToUint8ArrayInput =
   | Buffer
   | ArrayBufferLike
   | ArrayBufferView
-  | NodeJS.ArrayBufferView;
+  | NodeJS.ArrayBufferView
 ```
 
 <details>
@@ -742,25 +840,25 @@ The function returns a new `Uint8Array` instance created from the input data.
 ###### Converting a String to Uint8Array
 
 ```ts
-import { coerceToUint8Array } from "@alessiofrittoli/crypto-buffer";
 // or
-import { coerceToUint8Array } from "@alessiofrittoli/crypto-buffer/coercion";
+import { coerceToUint8Array } from '@alessiofrittoli/crypto-buffer/coercion'
+import { coerceToUint8Array } from '@alessiofrittoli/crypto-buffer'
 
-const buffer = coerceToUint8Array("Hello, World!");
+const buffer = coerceToUint8Array('Hello, World!')
 ```
 
 ###### Converting a DataView to Uint8Array
 
 ```ts
-import { coerceToUint8Array } from "@alessiofrittoli/crypto-buffer";
 // or
-import { coerceToUint8Array } from "@alessiofrittoli/crypto-buffer/coercion";
-import { toDataView } from "@alessiofrittoli/crypto-buffer/toDataView";
-import { stringToBinary } from "@alessiofrittoli/crypto-buffer/conversion";
+import { coerceToUint8Array } from '@alessiofrittoli/crypto-buffer/coercion'
+import { stringToBinary } from '@alessiofrittoli/crypto-buffer/conversion'
+import { toDataView } from '@alessiofrittoli/crypto-buffer/toDataView'
+import { coerceToUint8Array } from '@alessiofrittoli/crypto-buffer'
 
-const view = toDataView(stringToBinary("Hello, World!"));
+const view = toDataView(stringToBinary('Hello, World!'))
 
-console.log(coerceToUint8Array(view));
+console.log(coerceToUint8Array(view))
 ```
 
 </details>
@@ -969,11 +1067,11 @@ A new instance of `Float32Array`.
 <summary>Usage</summary>
 
 ```ts
-import { coerceToFloat32Array } from "@alessiofrittoli/crypto-buffer";
 // or
-import { coerceToFloat32Array } from "@alessiofrittoli/crypto-buffer/coercion";
+import { coerceToFloat32Array } from '@alessiofrittoli/crypto-buffer/coercion'
+import { coerceToFloat32Array } from '@alessiofrittoli/crypto-buffer'
 
-const float32Array = coerceToFloat32Array("Hello, World!");
+const float32Array = coerceToFloat32Array('Hello, World!')
 ```
 
 </details>
@@ -1013,11 +1111,11 @@ A new instance of `Float64Array`.
 <summary>Usage</summary>
 
 ```ts
-import { coerceToFloat64Array } from "@alessiofrittoli/crypto-buffer";
 // or
-import { coerceToFloat64Array } from "@alessiofrittoli/crypto-buffer/coercion";
+import { coerceToFloat64Array } from '@alessiofrittoli/crypto-buffer/coercion'
+import { coerceToFloat64Array } from '@alessiofrittoli/crypto-buffer'
 
-const float64Array = coerceToFloat64Array("Hello, World!");
+const float64Array = coerceToFloat64Array('Hello, World!')
 ```
 
 </details>
@@ -1086,11 +1184,11 @@ A new instance of `BigInt64Array`.
 <summary>Usage</summary>
 
 ```ts
-import { coerceToBigInt64Array } from "@alessiofrittoli/crypto-buffer";
 // or
-import { coerceToBigInt64Array } from "@alessiofrittoli/crypto-buffer/coercion";
+import { coerceToBigInt64Array } from '@alessiofrittoli/crypto-buffer/coercion'
+import { coerceToBigInt64Array } from '@alessiofrittoli/crypto-buffer'
 
-const bigInt64Array = coerceToBigInt64Array("Hello, World!");
+const bigInt64Array = coerceToBigInt64Array('Hello, World!')
 ```
 
 </details>
@@ -1130,88 +1228,16 @@ A new instance of `BigUint64Array`.
 <summary>Usage</summary>
 
 ```ts
-import { coerceToBigUint64Array } from "@alessiofrittoli/crypto-buffer";
 // or
-import { coerceToBigUint64Array } from "@alessiofrittoli/crypto-buffer/coercion";
+import { coerceToBigUint64Array } from '@alessiofrittoli/crypto-buffer/coercion'
+import { coerceToBigUint64Array } from '@alessiofrittoli/crypto-buffer'
 
-const bigUint64Array = coerceToBigUint64Array("Hello, World!");
+const bigUint64Array = coerceToBigUint64Array('Hello, World!')
 ```
 
 </details>
 
 ---
-
-### Development
-
-#### Install depenendencies
-
-```bash
-npm install
-```
-
-or using `pnpm`
-
-```bash
-pnpm i
-```
-
-#### Build the source code
-
-Run the following command to test and build code for distribution.
-
-```bash
-pnpm build
-```
-
-#### [ESLint](https://www.npmjs.com/package/eslint)
-
-warnings / errors check.
-
-```bash
-pnpm lint
-```
-
-#### [Jest](https://npmjs.com/package/jest)
-
-Run all the defined test suites by running the following:
-
-```bash
-# Run tests and watch file changes.
-pnpm test:watch
-
-# Run tests in a CI environment.
-pnpm test:ci
-```
-
-- See [`package.json`](./package.json) file scripts for more info.
-
-Run tests with coverage.
-
-An HTTP server is then started to serve coverage files from `./coverage` folder.
-
-⚠️ You may see a blank page the first time you run this command. Simply refresh the browser to see the updates.
-
-```bash
-test:coverage:serve
-```
-
----
-
-### Contributing
-
-Contributions are truly welcome!
-
-Please refer to the [Contributing Doc](./CONTRIBUTING.md) for more information on how to start contributing to this project.
-
-Help keep this project up to date with [GitHub Sponsor][sponsor-url].
-
-[![GitHub Sponsor][sponsor-badge]][sponsor-url]
-
----
-
-### Security
-
-If you believe you have found a security vulnerability, we encourage you to **_responsibly disclose this and NOT open a public issue_**. We will investigate all legitimate reports. Email `security@alessiofrittoli.it` to disclose any security vulnerabilities.
 
 ### Made with ☕
 
