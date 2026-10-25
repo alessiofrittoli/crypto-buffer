@@ -1,6 +1,6 @@
 {
 	"name": "@alessiofrittoli/crypto-buffer",
-	"version": "3.11.0",
+	"version": "3.12.0",
 	"description": "Lightweight TypeScript Node.js Buffers utility library",
 	"type": "module",
 	"author": {
@@ -36,8 +36,7 @@
 	"module": "./dist/index.mjs",
 	"types": "./dist/index.d.mts",
 	"files": [
-		"dist",
-		"scripts/postinstall"
+		"dist"
 	],
 	"exports": {
 		".": {
