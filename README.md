@@ -44,7 +44,7 @@
     - [`coerceToBigInt64Array`](#coercetobigint64array)
     - [`coerceToBigUint64Array`](#coercetobiguint64array)
 - [Development](#development)
-  - [Install depenendencies](#install-depenendencies)
+  - [Install dependencies](#install-dependencies)
   - [Build the source code](#build-the-source-code)
   - [ESLint](#eslint)
   - [Jest](#jest)
@@ -475,9 +475,9 @@ import { binarySequenceToUint8Array } from "@alessiofrittoli/crypto-buffer/conve
 console.log(
   binaryToString(
     binarySequenceToUint8Array(
-      "01001000 01100101 01101100 01101100 01101111 00100000 01110111 01101111 01110010 01101100 01100100 00100001"
-    )
-  )
+      "01001000 01100101 01101100 01101100 01101111 00100000 01110111 01101111 01110010 01101100 01100100 00100001",
+    ),
+  ),
 );
 // Outputs: 'Hello world!'
 
@@ -485,9 +485,9 @@ console.log(
   binaryToString(
     binarySequenceToUint8Array(
       "01001000-01100101-01101100-01101100-01101111-00100000-01110111-01101111-01110010-01101100-01100100-00100001",
-      "-"
-    )
-  )
+      "-",
+    ),
+  ),
 );
 // Outputs: 'Hello world!'
 ```
@@ -1143,7 +1143,7 @@ const bigUint64Array = coerceToBigUint64Array("Hello, World!");
 
 ### Development
 
-#### Install depenendencies
+#### Install dependencies
 
 ```bash
 npm install
@@ -1165,7 +1165,7 @@ pnpm build
 
 #### [ESLint](https://www.npmjs.com/package/eslint)
 
-warnings / errors check.
+Run warnings and errors checks.
 
 ```bash
 pnpm lint
